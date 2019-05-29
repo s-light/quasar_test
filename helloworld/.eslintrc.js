@@ -13,7 +13,8 @@ module.exports = {
   extends: [
     // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
     // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
-    'plugin:vue/essential',
+    // 'plugin:vue/essential',
+    'plugin:vue/strongly-recommended',
     '@vue/standard'
   ],
 
@@ -46,6 +47,10 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/no-extraneous-dependencies': 'off',
     'prefer-promise-reject-errors': 'off',
+    "indent": ["error", 4],
+    "vue/html-indent": ["error", 4],
+    "vue/script-indent": ["error", 4],
+
 
     // allow console.log during development only
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
