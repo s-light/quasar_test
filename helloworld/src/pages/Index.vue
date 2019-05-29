@@ -2,23 +2,21 @@
     <q-page class="flex flex-center">
         <section>
             <img
-                alt="Quasar logo"
-                src="~assets/quasar-logo-full.svg"
-            >
-            <h1>Hello World :-)</h1>
-            <img
                 alt="App-Logo"
                 src="~assets/logo_test3_splashscreen.svg"
             >
+            <h1>Hello World :-)</h1>
         </section>
         <section>
             <q-input
                 clearable
-                v-model="message"
-                label="Message"
+                filled
+                color="purple-12"
+                v-model="testmessage"
+                label="Test Message"
             />
             <div class="">
-                {{ message }}
+                {{ testmessage }}
             </div>
         </section>
     </q-page>
@@ -29,6 +27,11 @@
 
 <script>
 export default {
-    name: 'PageIndex'
+    name: 'PageIndex',
+    data () {
+        return {
+            testmessage: 'Some text'
+        }
+    }
 }
 </script>

@@ -4,11 +4,7 @@
             alt="Quasar logo"
             src="~assets/quasar-logo-full.svg"
         >
-        <h1>Hello World :-)</h1>
-        <img
-            alt="App-Logo"
-            src="~assets/logo_test3_splashscreen.svg"
-        >
+        <h1>!?Help?!</h1>
     </q-page>
 </template>
 
