@@ -16,7 +16,11 @@
           "iconHash": "7ac1c67350633a4ba25b28cef44080c0"
         }
       },
-      "build": {}
+      "build": {
+        "spa": {
+          "iconHash": "7ac1c67350633a4ba25b28cef44080c0"
+        }
+      }
     }
   }
 }
