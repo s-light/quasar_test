@@ -10,15 +10,18 @@
     "__internal": {
       "dev": {
         "spa": {
-          "iconHash": "7ac1c67350633a4ba25b28cef44080c0"
+          "iconHash": "a02f4f34575297041747ae059a203f2c"
         },
         "electron": {
-          "iconHash": "7ac1c67350633a4ba25b28cef44080c0"
+          "iconHash": "a02f4f34575297041747ae059a203f2c"
         }
       },
       "build": {
         "spa": {
-          "iconHash": "7ac1c67350633a4ba25b28cef44080c0"
+          "iconHash": "a02f4f34575297041747ae059a203f2c"
+        },
+        "electron": {
+          "iconHash": "a02f4f34575297041747ae059a203f2c"
         }
       }
     }

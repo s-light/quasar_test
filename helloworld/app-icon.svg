@@ -17,10 +17,10 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="logo_test2_square.svg"
-   inkscape:export-filename="logo_test2_square_1024x1024.png"
-   inkscape:export-xdpi="743.13"
-   inkscape:export-ydpi="743.13">
+   sodipodi:docname="logo_test3_square.svg"
+   inkscape:export-filename="logo_test3_square_1240x1240.png"
+   inkscape:export-xdpi="899.88574"
+   inkscape:export-ydpi="899.88574">
   <defs
      id="defs2">
     <linearGradient
@@ -33,7 +33,7 @@
       <stop
          id="stop1008"
          offset="1"
-         style="stop-color:#0000ff;stop-opacity:1" />
+         style="stop-color:#1901ff;stop-opacity:1" />
     </linearGradient>
     <linearGradient
        inkscape:collect="always"
@@ -43,7 +43,7 @@
          offset="0"
          id="stop966" />
       <stop
-         style="stop-color:#00ff00;stop-opacity:1"
+         style="stop-color:#01ffd2;stop-opacity:1"
          offset="1"
          id="stop968" />
     </linearGradient>
@@ -58,36 +58,38 @@
     <filter
        inkscape:collect="always"
        style="color-interpolation-filters:sRGB"
-       id="filter1806"
-       x="-0.023714352"
-       width="1.0474287"
-       y="-0.074699327"
-       height="1.1493987">
+       id="filter842"
+       x="-0.078"
+       width="1.156"
+       y="-0.078"
+       height="1.156">
       <feGaussianBlur
          inkscape:collect="always"
-         stdDeviation="0.89460784"
-         id="feGaussianBlur1808" />
+         stdDeviation="0.89850962"
+         id="feGaussianBlur844" />
     </filter>
     <radialGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient1010"
-       id="radialGradient890"
+       xlink:href="#linearGradient970"
+       id="radialGradient3805"
        gradientUnits="userSpaceOnUse"
-       cx="50.021961"
-       cy="280.14862"
-       fx="50.021961"
-       fy="280.14862"
-       r="14.073237" />
+       gradientTransform="matrix(0.98442369,-0.20897936,0.19706426,0.92829614,-54.128503,30.657879)"
+       cx="49.754776"
+       cy="279.96289"
+       fx="49.306915"
+       fy="280.68768"
+       r="14.323251" />
     <radialGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient970"
-       id="radialGradient892"
+       xlink:href="#linearGradient1010"
+       id="radialGradient3807"
        gradientUnits="userSpaceOnUse"
-       cx="50.021961"
-       cy="280.14862"
-       fx="50.021961"
-       fy="280.14862"
-       r="14.323251" />
+       gradientTransform="matrix(1.024205,0.00837592,-0.0081966,1.0022734,1.3794849,-0.86727351)"
+       cx="49.733421"
+       cy="279.96289"
+       fx="49.733425"
+       fy="279.96289"
+       r="14.073237" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -96,11 +98,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.6211123"
-     inkscape:cx="-39.842372"
-     inkscape:cy="118.62532"
+     inkscape:zoom="6.2139286"
+     inkscape:cx="42.565665"
+     inkscape:cy="66.141732"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g5679"
      showgrid="false"
      inkscape:pagecheckerboard="true"
      showborder="true"
@@ -115,7 +117,10 @@
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
-     fit-margin-bottom="0">
+     fit-margin-bottom="0"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-object-midpoints="true">
     <sodipodi:guide
        position="-15.556374,42.240686"
        orientation="1,0"
@@ -187,7 +192,7 @@
        y="0"
        xlink:href="#g5679"
        id="use5681"
-       style="opacity:0.8;filter:url(#filter1806)"
+       style="opacity:0.8;filter:url(#filter842)"
        width="100%"
        height="100%" />
     <g
@@ -208,7 +213,7 @@
          sodipodi:cx="50.021961"
          sodipodi:sides="12"
          id="path3764"
-         style="opacity:0.8;vector-effect:none;fill:url(#radialGradient890);fill-opacity:1;fill-rule:nonzero;stroke:url(#radialGradient892);stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+         style="opacity:0.8;vector-effect:none;fill:url(#radialGradient3807);fill-opacity:1;fill-rule:nonzero;stroke:url(#radialGradient3805);stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
          sodipodi:type="star" />
     </g>
   </g>

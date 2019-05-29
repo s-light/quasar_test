@@ -33,7 +33,7 @@
       <stop
          id="stop1008"
          offset="1"
-         style="stop-color:#0000ff;stop-opacity:1" />
+         style="stop-color:#1901ff;stop-opacity:1" />
     </linearGradient>
     <linearGradient
        inkscape:collect="always"
@@ -43,7 +43,7 @@
          offset="0"
          id="stop966" />
       <stop
-         style="stop-color:#00ff00;stop-opacity:1"
+         style="stop-color:#01ffd2;stop-opacity:1"
          offset="1"
          id="stop968" />
     </linearGradient>
