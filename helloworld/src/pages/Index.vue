@@ -18,6 +18,13 @@
             <div class="">
                 {{ testmessage }}
             </div>
+            <q-select
+                rounded
+                filled
+                v-model="model"
+                :options="options"
+                label="Rounded filled"
+            />
         </section>
     </q-page>
 </template>
@@ -30,7 +37,11 @@ export default {
     name: 'PageIndex',
     data () {
         return {
-            testmessage: 'Some text'
+            testmessage: 'Some text',
+            model: null,
+            options: [
+                'Font1', 'Font2', 'Font3', 'Font4', 'Font5'
+            ]
         }
     }
 }
