@@ -3,19 +3,22 @@
         <section>
             <img
                 alt="Quasar logo"
-                src="~assets/quasar-logo-full.svg">
+                src="~assets/quasar-logo-full.svg"
+            >
             <h1>Hello World :-)</h1>
             <img
                 alt="App-Logo"
-                src="~assets/logo_test3_splashscreen.svg">
+                src="~assets/logo_test3_splashscreen.svg"
+            >
         </section>
         <section>
             <q-input
                 clearable
                 v-model="message"
-                label="Message" /><br>
+                label="Message"
+            />
             <div class="">
-                {{message}}
+                {{ message }}
             </div>
         </section>
     </q-page>
