@@ -1,0 +1,334 @@
+/* written by stefan krüger git@s-light.eu */
+
+/*usage:*/
+/*@import url("fonts/Office-Code-Pro/load_as_family.css");*/
+/*	contained fonts:
+
+    Office Code Pro
+    Light
+    LightItalic
+    Regular
+    RegularItalic
+    Bold
+    BoldItalic
+
+    Office Code Pro D
+    (Dotted Zero)
+    Light
+    LightItalic
+    Regular
+    RegularItalic
+    Bold
+    BoldItalic
+
+    use as:
+    font-family: 'Office Code Pro'
+    font-style: normal | italic
+    font-weight: 300 | 400 | 500 | 700
+    or
+    font-family: 'Office Code Pro D'
+    font-style: normal | italic
+    font-weight: 300 | 400 | 500 | 700
+    info: Dotted Zero
+*/
+
+/*
+https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face
+and other font-xxxx pages
+these informations by Mozilla Contributors are licensed under CC-BY-SA 2.5.
+css allows following format:
+
+    font-family: <family-name>;
+    src: ...
+    unicode-range: <urange>#;
+    font-variant: <font-variant>;
+        https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant
+    font-feature-settings: normal | <feature-tag-value>#;
+        ...
+    font-stretch: <font-stretch>;
+        ultra-condensed
+        extra-condensed
+        condensed
+        semi-condensed
+        normal
+        semi-expanded
+        expanded
+        extra-expanded
+        ultra-expanded
+    font-weight: <weight>;
+        numerical   names
+        100    Thin (Hairline)
+        200    Extra Light (Ultra Light)
+        300    Light
+        400    Normal
+        500    Medium
+        600    Semi Bold (Demi Bold)
+        700    Bold
+        800    Extra Bold (Ultra Bold)
+        900    Black (Heavy)
+        names
+        normal  Normal font weight. Same as 400.
+        bold    Bold font weight. Same as 700.
+        lighter One font weight lighter than the parent element.
+        bolder  One font weight darker than the parent element.
+    font-style: <style>;
+        normal
+        italic  (cursive)
+        oblique (sloped)
+
+*/
+
+/*
+    Font familiy:
+        *
+
+        OfficeCodePro-Light
+        OfficeCodePro-LightItalic
+        OfficeCodePro-Regular
+        OfficeCodePro-RegularItalic
+        OfficeCodePro-Medium
+        OfficeCodePro-MediumItalic
+        OfficeCodePro-Bold
+        OfficeCodePro-BoldItalic
+
+        OfficeCodeProD-Light
+        OfficeCodeProD-LightItalic
+        OfficeCodeProD-Regular
+        OfficeCodeProD-RegularItalic
+        OfficeCodeProD-Medium
+        OfficeCodeProD-MediumItalic
+        OfficeCodeProD-Bold
+        OfficeCodeProD-BoldItalic
+
+*/
+
+
+
+/* Office-Code-Pro Light */
+@font-face {
+    font-family: 'Office Code Pro';
+    src: url('./Fonts/Office Code Pro/EOT/OfficeCodePro-Light.eot');
+    src: url('./Fonts/Office Code Pro/EOT/OfficeCodePro-Light.eot?#iefix') format('embedded-opentype'),
+         url('./Fonts/Office Code Pro/WOFF/OfficeCodePro-Light.woff') format('woff'),
+         url('./Fonts/Office Code Pro/WOFF2/OfficeCodePro-Light.woff2') format('woff2'),
+         url('./Fonts/Office Code Pro/OTF/OfficeCodePro-Light.otf') format('opentype'),
+         url('./Fonts/Office Code Pro/TTF/OfficeCodePro-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+/* Office-Code-Pro LightItalic */
+@font-face {
+    font-family: 'Office Code Pro';
+    src: url('./Fonts/Office Code Pro/EOT/OfficeCodePro-LightItalic.eot');
+    src: url('./Fonts/Office Code Pro/EOT/OfficeCodePro-LightItalic.eot?#iefix') format('embedded-opentype'),
+         url('./Fonts/Office Code Pro/WOFF/OfficeCodePro-LightItalic.woff') format('woff'),
+         url('./Fonts/Office Code Pro/WOFF2/OfficeCodePro-LightItalic.woff2') format('woff2'),
+         url('./Fonts/Office Code Pro/OTF/OfficeCodePro-LightItalic.otf') format('opentype'),
+         url('./Fonts/Office Code Pro/TTF/OfficeCodePro-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+    font-stretch: normal;
+}
+
+
+/* Office-Code-Pro Regular */
+@font-face {
+    font-family: 'Office Code Pro';
+    src: url('./Fonts/Office Code Pro/EOT/OfficeCodePro-Regular.eot');
+    src: url('./Fonts/Office Code Pro/EOT/OfficeCodePro-Regular.eot?#iefix') format('embedded-opentype'),
+         url('./Fonts/Office Code Pro/WOFF/OfficeCodePro-Regular.woff') format('woff'),
+         url('./Fonts/Office Code Pro/WOFF2/OfficeCodePro-Regular.woff2') format('woff2'),
+         url('./Fonts/Office Code Pro/OTF/OfficeCodePro-Regular.otf') format('opentype'),
+         url('./Fonts/Office Code Pro/TTF/OfficeCodePro-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+/* Office-Code-Pro RegularItalic */
+@font-face {
+    font-family: 'Office Code Pro';
+    src: url('./Fonts/Office Code Pro/EOT/OfficeCodePro-RegularItalic.eot');
+    src: url('./Fonts/Office Code Pro/EOT/OfficeCodePro-RegularItalic.eot?#iefix') format('embedded-opentype'),
+         url('./Fonts/Office Code Pro/WOFF/OfficeCodePro-RegularItalic.woff') format('woff'),
+         url('./Fonts/Office Code Pro/WOFF2/OfficeCodePro-RegularItalic.woff2') format('woff2'),
+         url('./Fonts/Office Code Pro/OTF/OfficeCodePro-RegularItalic.otf') format('opentype'),
+         url('./Fonts/Office Code Pro/TTF/OfficeCodePro-RegularItalic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+/* Office-Code-Pro Medium */
+@font-face {
+    font-family: 'Office Code Pro';
+    src: url('./Fonts/Office Code Pro/EOT/OfficeCodePro-Medium.eot');
+    src: url('./Fonts/Office Code Pro/EOT/OfficeCodePro-Medium.eot?#iefix') format('embedded-opentype'),
+         url('./Fonts/Office Code Pro/WOFF/OfficeCodePro-Medium.woff') format('woff'),
+         url('./Fonts/Office Code Pro/WOFF2/OfficeCodePro-Medium.woff2') format('woff2'),
+         url('./Fonts/Office Code Pro/OTF/OfficeCodePro-Medium.otf') format('opentype'),
+         url('./Fonts/Office Code Pro/TTF/OfficeCodePro-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+/* Office-Code-Pro MediumItalic */
+@font-face {
+    font-family: 'Office Code Pro';
+    src: url('./Fonts/Office Code Pro/EOT/OfficeCodePro-MediumItalic.eot');
+    src: url('./Fonts/Office Code Pro/EOT/OfficeCodePro-MediumItalic.eot?#iefix') format('embedded-opentype'),
+         url('./Fonts/Office Code Pro/WOFF/OfficeCodePro-MediumItalic.woff') format('woff'),
+         url('./Fonts/Office Code Pro/WOFF2/OfficeCodePro-MediumItalic.woff2') format('woff2'),
+         url('./Fonts/Office Code Pro/OTF/OfficeCodePro-MediumItalic.otf') format('opentype'),
+         url('./Fonts/Office Code Pro/TTF/OfficeCodePro-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+/* Office-Code-Pro Bold */
+@font-face {
+    font-family: 'Office Code Pro';
+    src: url('./Fonts/Office Code Pro/EOT/OfficeCodePro-Bold.eot');
+    src: url('./Fonts/Office Code Pro/EOT/OfficeCodePro-Bold.eot?#iefix') format('embedded-opentype'),
+         url('./Fonts/Office Code Pro/WOFF/OfficeCodePro-Bold.woff') format('woff'),
+         url('./Fonts/Office Code Pro/WOFF2/OfficeCodePro-Bold.woff2') format('woff2'),
+         url('./Fonts/Office Code Pro/OTF/OfficeCodePro-Bold.otf') format('opentype'),
+         url('./Fonts/Office Code Pro/TTF/OfficeCodePro-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+/* Office-Code-Pro BoldItalic */
+@font-face {
+    font-family: 'Office Code Pro';
+    src: url('./Fonts/Office Code Pro/EOT/OfficeCodePro-BoldItalic.eot');
+    src: url('./Fonts/Office Code Pro/EOT/OfficeCodePro-BoldItalic.eot?#iefix') format('embedded-opentype'),
+         url('./Fonts/Office Code Pro/WOFF/OfficeCodePro-BoldItalic.woff') format('woff'),
+         url('./Fonts/Office Code Pro/WOFF2/OfficeCodePro-BoldItalic.woff2') format('woff2'),
+         url('./Fonts/Office Code Pro/OTF/OfficeCodePro-BoldItalic.otf') format('opentype'),
+         url('./Fonts/Office Code Pro/TTF/OfficeCodePro-BoldItalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+/* ****************************************** */
+
+
+/* Office-Code-Pro D Light */
+@font-face {
+    font-family: 'Office Code Pro D';
+    src: url('./Fonts/Office Code Pro D/EOT/OfficeCodeProD-Light.eot');
+    src: url('./Fonts/Office Code Pro D/EOT/OfficeCodeProD-Light.eot?#iefix') format('embedded-opentype'),
+         url('./Fonts/Office Code Pro D/WOFF/OfficeCodeProD-Light.woff') format('woff'),
+         url('./Fonts/Office Code Pro D/WOFF2/OfficeCodeProD-Light.woff2') format('woff2'),
+         url('./Fonts/Office Code Pro D/OTF/OfficeCodeProD-Light.otf') format('opentype'),
+         url('./Fonts/Office Code Pro D/TTF/OfficeCodeProD-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+/* Office-Code-Pro D LightItalic */
+@font-face {
+    font-family: 'Office Code Pro D';
+    src: url('./Fonts/Office Code Pro D/EOT/OfficeCodeProD-LightItalic.eot');
+    src: url('./Fonts/Office Code Pro D/EOT/OfficeCodeProD-LightItalic.eot?#iefix') format('embedded-opentype'),
+         url('./Fonts/Office Code Pro D/WOFF/OfficeCodeProD-LightItalic.woff') format('woff'),
+         url('./Fonts/Office Code Pro D/WOFF2/OfficeCodeProD-LightItalic.woff2') format('woff2'),
+         url('./Fonts/Office Code Pro D/OTF/OfficeCodeProD-LightItalic.otf') format('opentype'),
+         url('./Fonts/Office Code Pro D/TTF/OfficeCodeProD-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+    font-stretch: normal;
+}
+
+
+/* Office-Code-Pro D Regular */
+@font-face {
+    font-family: 'Office Code Pro D';
+    src: url('./Fonts/Office Code Pro D/EOT/OfficeCodeProD-Regular.eot');
+    src: url('./Fonts/Office Code Pro D/EOT/OfficeCodeProD-Regular.eot?#iefix') format('embedded-opentype'),
+         url('./Fonts/Office Code Pro D/WOFF/OfficeCodeProD-Regular.woff') format('woff'),
+         url('./Fonts/Office Code Pro D/WOFF2/OfficeCodeProD-Regular.woff2') format('woff2'),
+         url('./Fonts/Office Code Pro D/OTF/OfficeCodeProD-Regular.otf') format('opentype'),
+         url('./Fonts/Office Code Pro D/TTF/OfficeCodeProD-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+/* Office-Code-Pro D RegularItalic */
+@font-face {
+    font-family: 'Office Code Pro D';
+    src: url('./Fonts/Office Code Pro D/EOT/OfficeCodeProD-RegularItalic.eot');
+    src: url('./Fonts/Office Code Pro D/EOT/OfficeCodeProD-RegularItalic.eot?#iefix') format('embedded-opentype'),
+         url('./Fonts/Office Code Pro D/WOFF/OfficeCodeProD-RegularItalic.woff') format('woff'),
+         url('./Fonts/Office Code Pro D/WOFF2/OfficeCodeProD-RegularItalic.woff2') format('woff2'),
+         url('./Fonts/Office Code Pro D/OTF/OfficeCodeProD-RegularItalic.otf') format('opentype'),
+         url('./Fonts/Office Code Pro D/TTF/OfficeCodeProD-RegularItalic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+/* Office-Code-Pro D Medium */
+@font-face {
+    font-family: 'Office Code Pro D';
+    src: url('./Fonts/Office Code Pro D/EOT/OfficeCodeProD-Medium.eot');
+    src: url('./Fonts/Office Code Pro D/EOT/OfficeCodeProD-Medium.eot?#iefix') format('embedded-opentype'),
+         url('./Fonts/Office Code Pro D/WOFF/OfficeCodeProD-Medium.woff') format('woff'),
+         url('./Fonts/Office Code Pro D/WOFF2/OfficeCodeProD-Medium.woff2') format('woff2'),
+         url('./Fonts/Office Code Pro D/OTF/OfficeCodeProD-Medium.otf') format('opentype'),
+         url('./Fonts/Office Code Pro D/TTF/OfficeCodeProD-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+/* Office-Code-Pro D MediumItalic */
+@font-face {
+    font-family: 'Office Code Pro D';
+    src: url('./Fonts/Office Code Pro D/EOT/OfficeCodeProD-MediumItalic.eot');
+    src: url('./Fonts/Office Code Pro D/EOT/OfficeCodeProD-MediumItalic.eot?#iefix') format('embedded-opentype'),
+         url('./Fonts/Office Code Pro D/WOFF/OfficeCodeProD-MediumItalic.woff') format('woff'),
+         url('./Fonts/Office Code Pro D/WOFF2/OfficeCodeProD-MediumItalic.woff2') format('woff2'),
+         url('./Fonts/Office Code Pro D/OTF/OfficeCodeProD-MediumItalic.otf') format('opentype'),
+         url('./Fonts/Office Code Pro D/TTF/OfficeCodeProD-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+/* Office-Code-Pro D Bold */
+@font-face {
+    font-family: 'Office Code Pro D';
+    src: url('./Fonts/Office Code Pro D/EOT/OfficeCodeProD-Bold.eot');
+    src: url('./Fonts/Office Code Pro D/EOT/OfficeCodeProD-Bold.eot?#iefix') format('embedded-opentype'),
+         url('./Fonts/Office Code Pro D/WOFF/OfficeCodeProD-Bold.woff') format('woff'),
+         url('./Fonts/Office Code Pro D/WOFF2/OfficeCodeProD-Bold.woff2') format('woff2'),
+         url('./Fonts/Office Code Pro D/OTF/OfficeCodeProD-Bold.otf') format('opentype'),
+         url('./Fonts/Office Code Pro D/TTF/OfficeCodeProD-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+/* Office-Code-Pro D BoldItalic */
+@font-face {
+    font-family: 'Office Code Pro D';
+    src: url('./Fonts/Office Code Pro D/EOT/OfficeCodeProD-BoldItalic.eot');
+    src: url('./Fonts/Office Code Pro D/EOT/OfficeCodeProD-BoldItalic.eot?#iefix') format('embedded-opentype'),
+         url('./Fonts/Office Code Pro D/WOFF/OfficeCodeProD-BoldItalic.woff') format('woff'),
+         url('./Fonts/Office Code Pro D/WOFF2/OfficeCodeProD-BoldItalic.woff2') format('woff2'),
+         url('./Fonts/Office Code Pro D/OTF/OfficeCodeProD-BoldItalic.otf') format('opentype'),
+         url('./Fonts/Office Code Pro D/TTF/OfficeCodeProD-BoldItalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+}
