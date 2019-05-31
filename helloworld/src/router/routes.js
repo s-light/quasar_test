@@ -8,7 +8,8 @@ const routes = [
             { path: 'font', component: () => import('pages/font.vue') },
             { path: 'hid', component: () => import('pages/hid.vue') },
             { path: 'serial', component: () => import('pages/serial.vue') },
-            { path: 'bluetooth', component: () => import('pages/bluetooth.vue') }
+            { path: 'bluetooth', component: () => import('pages/bluetooth.vue') },
+            { path: 'about', component: () => import('pages/about.vue') }
         ]
     },
     {

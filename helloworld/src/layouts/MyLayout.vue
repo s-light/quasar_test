@@ -115,6 +115,21 @@
                         </q-item-label>
                     </q-item-section>
                 </q-item>
+                <q-item
+                    clickable
+                    tag="a"
+                    target="_self"
+                    href="#/about"
+                >
+                    <q-item-section avatar>
+                        <q-icon name="help" />
+                    </q-item-section>
+                    <q-item-section>
+                        <q-item-label>
+                            About
+                        </q-item-label>
+                    </q-item-section>
+                </q-item>
             </q-list>
         </q-drawer>
 
