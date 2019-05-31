@@ -6,6 +6,7 @@ const routes = [
         children: [
             { path: '', component: () => import('pages/Index.vue') },
             { path: 'font', component: () => import('pages/font.vue') },
+            { path: 'font_editor', component: () => import('pages/font_editor.vue') },
             { path: 'hid', component: () => import('pages/hid.vue') },
             { path: 'serial', component: () => import('pages/serial.vue') },
             { path: 'bluetooth', component: () => import('pages/bluetooth.vue') },

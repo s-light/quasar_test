@@ -57,7 +57,25 @@
                             Font Test
                         </q-item-label>
                         <q-item-label caption>
-                            experiments with fonts...
+                            simple font selector
+                        </q-item-label>
+                    </q-item-section>
+                </q-item>
+                <q-item
+                    clickable
+                    tag="a"
+                    target="_self"
+                    href="#/font_editor"
+                >
+                    <q-item-section avatar>
+                        <q-icon name="font_download" />
+                    </q-item-section>
+                    <q-item-section>
+                        <q-item-label>
+                            Font Test2
+                        </q-item-label>
+                        <q-item-label caption>
+                            full WYSIWYG editor
                         </q-item-label>
                     </q-item-section>
                 </q-item>
