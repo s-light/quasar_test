@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Font Demo Page</title>
+    <!-- <link
+        rel="stylesheet"
+        href="load_as_family.css"
+        media="screen"
+        title="Font-Stylesheet"
+        charset="utf-8"
+    > -->
+    <style media="screen">
+
+        @import url("./load_as_family.css");
+        /*
+        Overpass
+            font-family: 'overpass'
+            font-style: normal | italic
+            font-weight: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
+            or
+            font-family: 'overpass-mono'
+            font-style: normal
+            font-weight: 300 | 400 | 500 | 600
+        */
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+
+            font-family: "overpass", sans-serif;
+            font-synthesis: none;
+            font-size: 1.1em;
+        }
+
+        p {
+            font-family: inherit;
+            font-synthesis: none;
+        }
+
+        .flex-container-horizontal {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-content: stretch;
+            align-items: center;
+            min-height: 100%;
+        }
+
+        .flex-container-vertical {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-content: stretch;
+            align-items: center;
+        }
+
+        .flex-item {
+            order: 0;
+            flex: 0 1 auto;
+            /*align-self: stretch;*/
+            align-self: auto;
+            margin: 0.5em;
+            padding: 0.5em;
+            /*background-color: rgba(200, 0, 0, 0.2);*/
+        }
+
+        table {
+            border-width: 0;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 0.2em;
+        }
+
+        tbody tr {
+            background-color: rgba(0, 0, 200, 0.0);
+            box-shadow: 0 0 10px rgba(0, 0, 200, 0.0);
+            transition: background-color, box-shadow 1s ease-in-out;
+        }
+        tbody tr:hover {
+            background-color: rgba(0, 0, 200, 0.1);
+            box-shadow: 0 0 5px rgba(0, 0, 200, 0.25);
+            transition: background-color, box-shadow 0.2s ease-in-out;
+        }
+
+        td:nth-child(2) {
+            font-style: normal;
+        }
+
+        td:nth-child(3) {
+            font-style: italic;
+        }
+
+        td:nth-child(4) {
+            font-family: 'overpass-mono';
+            font-style: normal;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="flex-container-horizontal">
+        <table class="flex-item">
+            <thead>
+                <tr>
+                    <th>weight</th>
+                    <th>regular</th>
+                    <th>italic</th>
+                    <th>regular mono</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="font-weight: 100;">
+                    <th>thin<br/>(100)</th>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                </tr>
+                <tr style="font-weight: 200;">
+                    <th>extralight<br/>(200)</th>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                </tr>
+                <tr style="font-weight: 300;">
+                    <th>light<br/>(300)</th>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                </tr>
+                <tr style="font-weight: 400;">
+                    <th>normal<br/>(400)</th>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                </tr>
+                <tr style="font-weight: 500;">
+                    <th>normal<br/>(500)</th>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                </tr>
+                <tr style="font-weight: 600;">
+                    <th>semibold<br/>(600)</th>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                </tr>
+                <tr style="font-weight: 700;">
+                    <th>bold<br/>(700)</th>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                </tr>
+                <tr style="font-weight: 800;">
+                    <th>extrabold<br/>(800)</th>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                </tr>
+                <tr style="font-weight: 900;">
+                    <th>black<br/>(900)</th>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                    <td>Demo Text with some more things - Forms and forms - 0123456789</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

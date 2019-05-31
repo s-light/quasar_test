@@ -4,29 +4,8 @@
 
 /*usage:*/
 /*@import url("fonts/titillium_webfontkit/load_as_family.css");*/
-/*	contained fonts:
-
-    Titillium
-    Thin
-    ThinItalic
-    Light
-    LightItalic
-    Regular
-    RegularItalic
-    Semibold
-    SemiboldItalic
-    Bold
-    BoldItalic
-    Black
-
-    Titillium-Upright
-    Thin
-    Light
-    normal
-    Semibold
-    Bold
-
-    use as:
+/* 
+Titillium
     font-family: 'Titillium'
     font-style: normal | italic
     font-weight: 100 | 300 | 400 | 600 | 700 | 900

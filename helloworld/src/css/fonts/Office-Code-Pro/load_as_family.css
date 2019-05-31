@@ -2,26 +2,8 @@
 
 /*usage:*/
 /*@import url("fonts/Office-Code-Pro/load_as_family.css");*/
-/*	contained fonts:
-
-    Office Code Pro
-    Light
-    LightItalic
-    Regular
-    RegularItalic
-    Bold
-    BoldItalic
-
-    Office Code Pro D
-    (Dotted Zero)
-    Light
-    LightItalic
-    Regular
-    RegularItalic
-    Bold
-    BoldItalic
-
-    use as:
+/*
+Office Code Pro
     font-family: 'Office Code Pro'
     font-style: normal | italic
     font-weight: 300 | 400 | 500 | 700
