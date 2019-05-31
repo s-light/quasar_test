@@ -1,6 +1,12 @@
 <template>
     <q-page class="flex flex-center">
         <section>
+            <h4>Quasar Tests</h4>
+            <p>
+                this is a collection of tests with and for the Quasara framework.<br>
+                find the source repository at <br>
+                <a href="https://github.com/s-light/quasar_test" target="_blank">https://github.com/s-light/quasar_test</a>
+            </p>
             <h4>Fonts</h4>
             <p>
                 list of extra fonts.<br>
