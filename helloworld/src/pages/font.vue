@@ -1,12 +1,11 @@
 <template>
     <q-page class="flex flex-center">
         <section>
-            <canvas-text-render
+            <CanvasTextRender
                 :value="testmessage"
                 :font-family="font_active"
-                font-weight="500"
-                italic="false"
-                height="11"
+                :font-weight="font_weight"
+                :height="height"
             />
 
             <div
@@ -60,9 +59,7 @@
 
 <script>
 
-// import {
-//   CanvasTextRender
-// } from 'components'
+import CanvasTextRender from 'components/CanvasTextRender.vue'
 
 export default {
     name: 'FontTest',
@@ -77,15 +74,16 @@ export default {
                 // 'Rujis Handwriting Font v.2.0',
                 'Rujis Handwriting Font v20',
                 'Office Code Pro',
-                'Office Code Pro D',
+                // 'Office Code Pro D',
                 'Overpass',
                 'Overpass-mono',
-                'Roboto',
-                '-- Not a Font --',
-                'Overlock',
-                'Ruthie'
+                'Roboto'
+                // 'Overlock',
+                // 'Ruthie'
             ],
-            font_list_filtered: this.font_list
+            font_list_filtered: this.font_list,
+            font_weight: 500,
+            height: 10
         }
     },
     methods: {
@@ -108,6 +106,9 @@ export default {
             if (!value) return ''
             return JSON.stringify(value, null, '    ')
         }
+    },
+    components: {
+        CanvasTextRender
     }
 }
 
