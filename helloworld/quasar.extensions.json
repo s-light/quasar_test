@@ -1,7 +1,7 @@
 {
   "@quasar/icon-factory": {
-    "minify_dev": "zopfli",
-    "minify_build": "zopfli",
+    "minify_dev": "optipng",
+    "minify_build": "optipng",
     "cordova": {
       "background_color": "#000074",
       "splashscreen_type": "pure"
