@@ -6,15 +6,21 @@
         >
             {{ value }}
         </canvas>
-        <p>
+        <div>
             {{ width }}x{{ height }}
-        </p>
+        </div>
     </div>
 </template>
 
 <style>
-    canvas {
+    .canvas-text-render canvas {
+        display: block;
+        margin: 0 auto;
         border: 1px solid black;
+    }
+    .canvas-text-render div {
+        margin: 0 auto;
+        text-align: center;
     }
 </style>
 

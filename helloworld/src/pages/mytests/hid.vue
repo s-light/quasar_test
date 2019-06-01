@@ -1,6 +1,6 @@
 <template>
-    <q-page class="flex flex-center">
-        <section>
+    <q-page class="flex column" style="align-items: center;">
+        <section style="margin-top: 1em;">
             <q-btn
                 filled
                 label="Find Devices"

@@ -1,6 +1,6 @@
 <template>
-    <q-page class="flex flex-center">
-        <section>
+    <q-page class="flex column" style="align-items: center;">
+        <section style="margin-top: 1em;">
             <q-input
                 clearable
                 filled
@@ -14,7 +14,7 @@
     </q-page>
 </template>
 
-<style>
+<style lang="stylus">
 </style>
 
 <script>

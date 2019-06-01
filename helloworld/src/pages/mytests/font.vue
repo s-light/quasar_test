@@ -1,12 +1,13 @@
 <template>
-    <q-page class="flex flex-center">
-        <section>
+    <q-page class="flex column" style="align-items: center;">
+        <section style="margin-top: 1em;">
             <CanvasTextRender
                 :value="testmessage"
                 :font-family="font_active"
                 :font-weight="font_weight"
                 :font-style="font_style"
                 :height="height"
+                style="margin: 1em auto;"
             />
 
             <div
@@ -15,6 +16,8 @@
             >
                 {{ testmessage }}
             </div>
+        </section>
+        <section>
             <q-input
                 clearable
                 filled
@@ -73,7 +76,7 @@
     </q-page>
 </template>
 
-<style>
+<style lang="stylus">
 </style>
 
 <script>

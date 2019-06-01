@@ -1,5 +1,5 @@
 <template>
-    <q-page class="flex flex-center">
+    <q-page class="flex column" style="align-items: center;">
         <section>
             <h4>Quasar Tests</h4>
             <p>
@@ -12,6 +12,7 @@
                     https://github.com/s-light/quasar_test
                 </a>
             </p>
+
             <h4>Fonts</h4>
             <p>
                 list of extra fonts.<br>
@@ -85,7 +86,7 @@
     </q-page>
 </template>
 
-<style>
+<style lang="stylus">
 </style>
 
 <script>

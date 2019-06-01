@@ -1,6 +1,6 @@
 <template>
-    <q-page class="flex flex-center">
-        <section>
+    <q-page class="flex column" style="align-items: center;">
+        <section style="margin-top: 1em;">
             <q-editor
                 v-model="qeditor"
                 :dense="$q.screen.lt.md"
@@ -54,13 +54,12 @@
                     roboto: 'Roboto',
                 }"
             />
-            <div style="max-width: 50vw;">
-                {{ qeditor }}
-            </div>
-            <hr>
-            <div style="max-width: 50vw;">
-                {{ message_formated | prettyprint }}
-            </div>
+        </section>
+        <section>
+            <div class="my-pre">{{ qeditor }}</div>
+            <!-- <div class="my-pre">{{ message_formated | prettyprint }}</div> -->
+        </section>
+        <section>
             <h4>
                 Todo:
             </h4>
@@ -80,7 +79,13 @@
     </q-page>
 </template>
 
-<style>
+<style lang="stylus">
+    .my-pre
+        max-width: 50vw
+        background-color: hsla(0, 0, 0, 0.05)
+        padding: 0.5em
+        margin: 0.5em
+        white-space: pre
 </style>
 
 <script>
@@ -121,37 +126,39 @@ export default {
             // console.log('resulttree:', resulttree)
             // let resulttree = this.qeditor.split('<br>')[0]
             return resulttree
-        },
-        message_formated: function () {
-            let result = []
-            for (const node of this.qeditor_tree) {
-                // console.log('node', node)
-                if (node === 'BR') {
-                    break
-                } else {
-                    const nodeObj = {
-                        value: '',
-                        format: {}
-                    }
-                    if (node === '#text') {
-                        nodeObj.value = node.textContent
-                    } else {
-                        nodeObj.value = node.textContent
-                        // nodeObj.format.fontFamily = node
-                        // TODO!!!!!
-                    }
-                    // console.log('nodeObj', nodeObj)
-                    result.push(nodeObj)
-                }
-            }
-            console.log('result:', result)
-            return result
         }
+        // },
+        // message_formated: function () {
+        //     let result = []
+        //     for (const node of this.qeditor_tree) {
+        //         // console.log('node', node)
+        //         if (node === 'BR') {
+        //             break
+        //         } else {
+        //             const nodeObj = {
+        //                 value: '',
+        //                 format: {}
+        //             }
+        //             if (node === '#text') {
+        //                 nodeObj.value = node.textContent
+        //             } else {
+        //                 nodeObj.value = node.textContent
+        //                 // nodeObj.format.fontFamily = node
+        //                 // TODO!!!!!
+        //             }
+        //             // console.log('nodeObj', nodeObj)
+        //             result.push(nodeObj)
+        //         }
+        //     }
+        //     console.log('result:', result)
+        //     return result
+        // }
     },
     filters: {
         prettyprint: function (value) {
+            console.log('value', value)
             if (!value) return ''
-            return JSON.stringify(value, null, '    ')
+            return JSON.stringify(value, null, 4)
         }
     }
 }
