@@ -83,7 +83,7 @@ export default {
             ],
             font_list_filtered: this.font_list,
             font_weight: 500,
-            height: 10
+            height: 11
         }
     },
     methods: {

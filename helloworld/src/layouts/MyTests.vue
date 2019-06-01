@@ -36,18 +36,24 @@
             content-class="bg-grey-2"
         >
             <q-list>
-                <q-item-label header>
+                <q-item
+                    header
+                    clickable
+                    v-ripple
+                    to="welcome"
+                    exact
+                >
                     <img
                         alt="App-Logo"
                         src="~assets/logo_test3_splashscreen.svg"
                         style="max-width: 100%;"
                     >
-                </q-item-label>
+                </q-item>
                 <q-item
                     clickable
-                    tag="a"
-                    target="_self"
-                    href="#/font"
+                    v-ripple
+                    to="font"
+                    exact
                 >
                     <q-item-section avatar>
                         <q-icon name="font_download" />
@@ -63,9 +69,9 @@
                 </q-item>
                 <q-item
                     clickable
-                    tag="a"
-                    target="_self"
-                    href="#/font_editor"
+                    v-ripple
+                    to="font_editor"
+                    exact
                 >
                     <q-item-section avatar>
                         <q-icon name="font_download" />
@@ -81,9 +87,9 @@
                 </q-item>
                 <q-item
                     clickable
-                    tag="a"
-                    target="_self"
-                    href="#/hid"
+                    v-ripple
+                    to="hid"
+                    exact
                 >
                     <q-item-section avatar>
                         <q-icon name="device_hub" />
@@ -99,9 +105,9 @@
                 </q-item>
                 <q-item
                     clickable
-                    tag="a"
-                    target="_self"
-                    href="#/serial"
+                    v-ripple
+                    to="serial"
+                    exact
                 >
                     <q-item-section avatar>
                         <q-icon name="developer_board" />
@@ -117,9 +123,9 @@
                 </q-item>
                 <q-item
                     clickable
-                    tag="a"
-                    target="_self"
-                    href="#/bluetooth"
+                    v-ripple
+                    to="bluetooth"
+                    exact
                 >
                     <q-item-section avatar>
                         <q-icon name="bluetooth" />
@@ -135,6 +141,7 @@
                 </q-item>
                 <q-item
                     clickable
+                    v-ripple
                     tag="a"
                     target="_self"
                     href="#/about"
@@ -158,20 +165,20 @@
 </template>
 
 <script>
-import { openURL } from 'quasar'
 
 export default {
-    name: 'MyLayout',
+    name: 'MyTests',
     data () {
         return {
-            leftDrawerOpen: this.$q.platform.is.desktop
+            leftDrawerOpen: this.$q.platform.is.desktop,
+            link: 'index'
         }
-    },
-    methods: {
-        openURL
     }
 }
 </script>
 
-<style>
+<style lang="stylus">
+.my-menu-link
+    color white
+    background #F2C037
 </style>
