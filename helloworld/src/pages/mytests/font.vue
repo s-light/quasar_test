@@ -5,12 +5,13 @@
                 :value="testmessage"
                 :font-family="font_active"
                 :font-weight="font_weight"
+                :font-style="font_style"
                 :height="height"
             />
 
             <div
                 style="margin: 2em; background-color:$primary;"
-                :style="{fontFamily : font_active}"
+                :style="{fontFamily: font_active, fontWeight: font_weight, fontStyle: font_style}"
             >
                 {{ testmessage }}
             </div>
@@ -50,6 +51,24 @@
                     </q-item>
                 </template>
             </q-select>
+            <q-toggle
+                v-model="font_style"
+                false-value=""
+                true-value="italic"
+                label="italic"
+            />
+            <q-slider
+                v-model="font_weight"
+                :min="100"
+                :max="900"
+                :step="100"
+                snap
+                markers
+                label
+            />
+            <q-badge color="secondary">
+                font_weight: {{ font_weight }}, font_active: {{ font_active }}
+            </q-badge>
         </section>
     </q-page>
 </template>
@@ -83,6 +102,7 @@ export default {
             ],
             font_list_filtered: this.font_list,
             font_weight: 500,
+            font_style: '',
             height: 11
         }
     },

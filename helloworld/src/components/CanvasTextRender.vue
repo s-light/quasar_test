@@ -6,7 +6,9 @@
         >
             {{ value }}
         </canvas>
-        {{ width }}x{{ height }}
+        <p>
+            {{ width }}x{{ height }}
+        </p>
     </div>
 </template>
 
@@ -37,9 +39,9 @@ export default {
             type: Number,
             default: 500
         },
-        italic: {
-            type: Boolean,
-            default: false
+        fontStyle: {
+            type: String,
+            default: ''
         },
         // width: {
         //     type: Number,
@@ -52,7 +54,7 @@ export default {
     },
     data () {
         return {
-            testmessage: '16:05 Here we have some text...',
+            testmessage: '01:42 Hello World :-)',
             width: 100
             // height: 10
         }
@@ -61,11 +63,8 @@ export default {
         // https://developer.mozilla.org/en-US/docs/Web/CSS/font
         font: function () {
             let font = ''
-            if (this.italic) {
-                font += 'italic '
-            }
-            // font += this.fontWeight + ' '
-            // font += ' ' + this.height + 'px'
+            font += this.fontStyle + ' '
+            font += this.fontWeight + ' '
             font += this.height + 'px'
             // font += ' ' + this.fontSize
             font += ' "' + this.fontFamily + '"'
@@ -101,7 +100,7 @@ export default {
                 // clean up
                 ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-                console.log('this.font', this.font)
+                // console.log('this.font', this.font)
                 // render
                 ctx.fillStyle = 'black'
                 ctx.font = this.font

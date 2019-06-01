@@ -40,7 +40,9 @@ module.exports = function (ctx) {
                 'QInput',
                 'QEditor',
                 'QSelect',
-                'QSlider'
+                'QToggle',
+                'QSlider',
+                'QBadge'
             ],
 
             directives: [
