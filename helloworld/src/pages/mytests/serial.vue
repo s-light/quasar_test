@@ -110,9 +110,9 @@
 import { date } from 'quasar'
 
 // Serial things
-import { SerialPort } from 'serialport'
+// import { SerialPort } from 'serialport'
 // ^ this does not work in SPA
-// let SerialPort
+let SerialPort
 // import('serialport')
 //     .then(module => {
 //         SerialPort = module
@@ -314,6 +314,7 @@ export default {
         console.log('mounted..')
         this.deviceSelected = this.deviceList[0]
         if (SerialPort) {
+            console.log('try setup SerialPort usage..')
             try {
                 const Readline = SerialPort.parsers.Readline
                 this.parser = new Readline()
@@ -323,7 +324,9 @@ export default {
                 this.serialAvailable = false
                 console.error(e)
             }
+            console.log('search for devices..')
             this.search()
+            console.log('setup done.')
         }
         console.log('mounted - done')
     },
@@ -351,25 +354,25 @@ export default {
 </script>
 
 <style lang="stylus">
-.log
-    flex-grow: 2
-    min-width: 50vw
-    max-width: 100vw
-    overflow: auto
-    background-color: hsla(0, 0, 0, 0.05)
-    /* white-space: pre */
-    font-size: 1em
-    line-height: 129%
-    font-family: Overpass-mono
-/* .line */
-.log .info
-    background $info
-    min-width 3em
-    text-align right
-.log pre
-    margin: 0
-    white-space: pre
-    font-size: 1em
-    line-height: 129%
-    font-family: Overpass-mono
+    .log
+        flex-grow: 2
+        min-width: 50vw
+        max-width: 100vw
+        overflow: auto
+        background-color: hsla(0, 0, 0, 0.05)
+        /* white-space: pre */
+        font-size: 1em
+        line-height: 129%
+        font-family: Overpass-mono
+    /* .line */
+    .log .info
+        background $info
+        min-width 3em
+        text-align right
+    .log pre
+        margin: 0
+        white-space: pre
+        font-size: 1em
+        line-height: 129%
+        font-family: Overpass-mono
 </style>

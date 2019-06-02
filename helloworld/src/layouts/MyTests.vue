@@ -124,6 +124,24 @@
                 <q-item
                     clickable
                     v-ripple
+                    to="serial_minimal"
+                    exact
+                >
+                    <q-item-section avatar>
+                        <q-icon name="developer_board" />
+                    </q-item-section>
+                    <q-item-section>
+                        <q-item-label>
+                            Serial Tests Minimal
+                        </q-item-label>
+                        <q-item-label caption>
+                            serial connection tests
+                        </q-item-label>
+                    </q-item-section>
+                </q-item>
+                <q-item
+                    clickable
+                    v-ripple
                     to="bluetooth"
                     exact
                 >

@@ -10,6 +10,7 @@ const routes = [
             { path: 'font_editor', component: () => import('pages/mytests/font_editor.vue') },
             { path: 'hid', component: () => import('pages/mytests/hid.vue') },
             { path: 'serial', component: () => import('pages/mytests/serial.vue') },
+            { path: 'serial_minimal', component: () => import('pages/mytests/serial_minimal.vue') },
             { path: 'bluetooth', component: () => import('pages/mytests/bluetooth.vue') },
             { path: 'about', component: () => import('pages/mytests/about.vue') }
         ]
