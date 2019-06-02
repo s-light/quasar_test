@@ -41,6 +41,8 @@ how to use & install this repository
     # Every time you run "npm install", run this:
     /helloworld$ $(npm bin)/electron-rebuild
     # ....
+    /helloworld$ npm rebuild
+    # ....
     ```
 - then start the SPA app in dev mode
     ```bash
