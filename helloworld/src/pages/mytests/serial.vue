@@ -10,10 +10,18 @@
                 class="q-mr-md"
                 style="min-width:12em; background: transparent"
                 label="Device"
-                v-model="device_selected"
-                :options="device_list"
-                :disable="device_ready"
+                option-label="comName"
+                v-model="deviceSelected"
+                :options="deviceList"
+                :disable="deviceConnected"
             >
+                <template v-slot:no-option>
+                    <q-item>
+                        <q-item-section>
+                            No Devices
+                        </q-item-section>
+                    </q-item>
+                </template>
                 <template v-slot:append>
                     <q-btn
                         flat
@@ -21,8 +29,8 @@
                         dense
                         hint="search devices"
                         icon="refresh"
-                        :disable="device_ready"
-                        :loading="device_searching"
+                        :disable="deviceConnected"
+                        :loading="deviceSearching"
                         @click="search()"
                     >
                         <template v-slot:loading>
@@ -33,12 +41,12 @@
             </q-select>
             <q-btn
                 rounded
-                :icon="device_ready ? 'phonelink_off' : 'phonelink'"
-                :style="{opacity: (device_selected ? 'inherit' : '0.05')}"
-                :loading="device_connecting"
+                :icon="deviceConnected ? 'phonelink_off' : 'phonelink'"
+                :style="{opacity: (deviceSelected ? 'inherit' : '0.05')}"
+                :loading="deviceConnecting"
                 @click="toggleConnect()"
-                :label="device_ready ? 'disconnect' : 'connect'"
-                :disable="!device_selected"
+                :label="deviceConnected ? 'disconnect' : 'connect'"
+                :disable="!deviceSelected"
             >
                 <template v-slot:loading>
                     <q-spinner-gears />
@@ -70,15 +78,15 @@
             <q-input
                 filled
                 label="Send Message"
-                v-model="messagae_to_send"
-                :disable="!device_ready"
+                v-model="messagaeToSend"
+                :disable="!deviceConnected"
                 @keyup.enter="messageSend()"
             >
                 <template v-slot:append>
                     <q-icon
-                        :style="{opacity: (messagae_to_send !== '' ? 'inherit' : '0.1')}"
+                        :style="{opacity: (messagaeToSend !== '' ? 'inherit' : '0.1')}"
                         name="close"
-                        @click="messagae_to_send = ''"
+                        @click="messagaeToSend = ''"
                         class="cursor-pointer"
                     />
                 </template>
@@ -89,7 +97,7 @@
                         dense
                         flat
                         icon="send"
-                        :disable="!device_ready"
+                        :disable="!deviceConnected"
                         @click="messageSend()"
                     />
                 </template>
@@ -100,34 +108,37 @@
 
 <script>
 import { date } from 'quasar'
-// import serialport from 'serialport'
 
-// var serialport = require('serialport')
-// x = require('serialport')
+// Serial things
+import { SerialPort } from 'serialport'
+// ^ this does not work in SPA
+// let SerialPort
+// import('serialport')
+//     .then(module => {
+//         SerialPort = module
+//     })
+//     .catch(err => {
+//         console.error('import serialport\n', err)
+//     })
 
 const demoData = [
     {
-        direction: '*',
+        direction: '~',
         time: '2019-06-02T11:42:42.000Z',
         text: 'First Line'
     },
     {
-        direction: '*',
-        time: '2019-06-02T11:42:42.010Z',
-        text: 'second line'
-    },
-    {
-        direction: '*',
+        direction: '~',
         time: '2019-06-02T11:42:42.102Z',
-        text: 'line with\nmultiline\n content'
+        text: 'multiline\n content'
     },
     {
-        direction: '*',
+        direction: '~',
         time: '2019-06-02T11:42:42.200Z',
         text: ''
     },
     {
-        direction: '*',
+        direction: '~',
         time: '2019-06-02T11:42:42.420Z',
         text: `this 'line' contains a full unicode styled table:
 ╔════════════════╦═══════╦══════╗
@@ -138,97 +149,183 @@ const demoData = [
 ╚════════════════╩═══════╩══════╝`
     },
     {
-        direction: '*',
+        direction: '~',
         time: '2019-06-02T11:43:00.000Z',
         text: 'the end..'
     }
 ]
 
 export default {
-    name: 'HidTest',
+    name: 'SerialTest',
     data () {
         return {
-            device_list: [
-                'dummyResponder',
-                'ttyUSB0',
-                'ttyUSB1',
-                'ttyACM0',
-                'ttyACM1'
-            ],
-            device_selected: 'dummyResponder',
-            device_searching: false,
-            device_connecting: false,
-            device_ready: false,
-            messagae_to_send: 'Hello World :-)',
-            log: demoData
+            serialAvailable: false,
+            port: undefined,
+            parser: undefined,
+            deviceList: [{
+                comName: 'dummyResponder',
+                manufacturer: 's-light.eu',
+                serialNumber: '42',
+                pnpId: undefined,
+                locationId: undefined,
+                productId: undefined,
+                vendorId: undefined
+            }],
+            deviceSelected: undefined,
+            deviceSearching: false,
+            deviceConnecting: false,
+            deviceConnected: false,
+            messagaeToSend: 'Hello World :-)',
+            log: demoData,
+            logCountMax: 500
         }
     },
     methods: {
         toggleConnect () {
-            this.device_connecting = true
-            // simulate a delay
-            setTimeout(() => {
-                // we're done, we reset loading state
-                this.device_connecting = false
-                this.device_ready = !this.device_ready
-            }, 1000)
+            this.deviceConnecting = true
+            if (this.deviceSelected.comName.startsWith('dummyResponder')) {
+                // simulate a delay
+                setTimeout(() => {
+                    // we're done, we reset loading state
+                    this.deviceConnecting = false
+                    this.deviceConnected = !this.deviceConnected
+                }, 1000)
+            } else {
+                if (this.deviceConnected) {
+                    this.portClose()
+                } else {
+                    this.portOpen()
+                }
+            }
+        },
+        portOpen () {
+            if (this.serialAvailable) {
+                this.port = new SerialPort(
+                    this.deviceSelected.comName, { baudRate: 115200 })
+                this.port.pipe(this.parser)
+                this.port.on('open', function () {
+                    this.deviceConnected = true
+                    this.deviceConnecting = false
+                })
+                this.port.on('close', function () {
+                    this.deviceConnected = false
+                    this.deviceConnecting = false
+                })
+            }
+        },
+        portClose () {
+            if (this.serialAvailable) {
+                this.port.close()
+            }
         },
         messageSend () {
-            console.log('send message:', this.messagae_to_send)
-            // TODO(s-light): implement sending
-            const logEntry = {
-                direction: '>',
-                time: new Date(),
-                text: this.messagae_to_send
-            }
-            this.log.push(logEntry)
-            if (this.device_selected === 'dummyResponder') {
-                const recMessage = this.messagae_to_send
-                // simulate a delay
+            // console.log('send message:', this.messagaeToSend)
+            if (this.deviceSelected.comName.startsWith('dummyResponder')) {
+                const recMessage = this.messagaeToSend
                 setTimeout(() => {
                     this.messageReceive(recMessage)
                 }, 500)
+            } else {
+                if (this.serialAvailable) {
+                    this.port.write(this.messagaeToSend + '\n')
+                }
             }
-            this.messagae_to_send = ''
+            const logEntry = {
+                // https://stackoverflow.com/questions/33253275/what-unicode-symbol-represents-a-person
+                // direction: '👤',
+                direction: '→',
+                time: new Date(),
+                text: this.messagaeToSend
+            }
+            this.log.push(logEntry)
+            this.messagaeToSend = ''
         },
         messageReceive (value) {
             // console.log('receive message:', value)
             const logEntry = {
-                direction: '<',
+                direction: '*',
                 time: new Date(),
                 text: value
             }
             this.log.push(logEntry)
+            // limit log length
+            while (this.log.length > this.logCountMax) {
+                this.log.shift()
+            }
         },
         search () {
-            this.device_searching = true
-
-            // test import..
-            // var serialport = require('serialport')
-            // if (serialport) {
-            //     console.log('serialport', serialport)
-            //     serialport.list((err, ports) => {
-            //         console.log('ports', ports)
-            //         if (err) {
-            //             console.error('serialport.list:', err)
-            //         }
-            //     })
-            // } else {
-            //     console.error('serialport', serialport)
-            // }
-
-            // simulate a delay
-            setTimeout(() => {
-                // we're done, we reset loading state
-                this.device_searching = false
-                this.device_list.push('xyz')
-            }, 2000)
+            this.deviceSearching = true
+            if (this.serialAvailable) {
+                SerialPort.list().then(
+                    ports => {
+                        // ports.forEach(console.log)
+                        // reset list
+                        this.deviceList = [{
+                            comName: 'dummyResponder',
+                            manufacturer: 's-light.eu',
+                            serialNumber: '42',
+                            pnpId: undefined,
+                            locationId: undefined,
+                            productId: undefined,
+                            vendorId: undefined
+                        }]
+                        this.deviceList.push(...ports)
+                    },
+                    err => {
+                        console.error('serialport.list:', err)
+                        this.deviceSearching = false
+                    }
+                )
+                // SerialPort.list((err, ports) => {
+                //     console.log('ports', ports)
+                //     if (err) {
+                //         console.error('serialport.list:', err)
+                //     } else {
+                //         // reset list
+                //         this.deviceList = ['dummyResponder']
+                //         this.deviceList.push(...ports)
+                //     }
+                //     this.deviceSearching = false
+                // })
+            } else {
+                // simulate a delay
+                setTimeout(() => {
+                    // we're done, we reset loading state
+                    this.deviceList.push({
+                        comName: 'dummyResponder' + this.deviceList.length,
+                        manufacturer: 's-light.eu',
+                        serialNumber: 42 + (this.deviceList.length * 100),
+                        pnpId: undefined,
+                        locationId: undefined,
+                        productId: undefined,
+                        vendorId: undefined
+                    })
+                    this.deviceSearching = false
+                }, 2000)
+            }
         }
     },
     computed: {
         // example_computed: function () {
         //     return
         // }
+    },
+    mounted: function () {
+        console.log('mounted..')
+        this.deviceSelected = this.deviceList[0]
+        if (SerialPort) {
+            try {
+                const Readline = SerialPort.parsers.Readline
+                this.parser = new Readline()
+                this.parser.on('data', line => this.messageReceive(line))
+                this.serialAvailable = true
+            } catch (e) {
+                this.serialAvailable = false
+                console.error(e)
+            }
+            this.search()
+        }
+        console.log('mounted - done')
     },
     filters: {
         timeOnly: function (value) {
