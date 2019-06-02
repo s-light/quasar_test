@@ -99,12 +99,10 @@
 
 <script>
 import { date } from 'quasar'
+// import serialport from 'serialport'
 
-// test import..
-var sp = require('serialport');
-sp.list(function(err, ports) {
-    console.log(ports);
-});
+// var serialport = require('serialport')
+// x = require('serialport')
 
 const demoData = [
     {
@@ -203,6 +201,21 @@ export default {
         },
         search () {
             this.device_searching = true
+
+            // test import..
+            // var serialport = require('serialport')
+            // if (serialport) {
+            //     console.log('serialport', serialport)
+            //     serialport.list((err, ports) => {
+            //         console.log('ports', ports)
+            //         if (err) {
+            //             console.error('serialport.list:', err)
+            //         }
+            //     })
+            // } else {
+            //     console.error('serialport', serialport)
+            // }
+
             // simulate a delay
             setTimeout(() => {
                 // we're done, we reset loading state
@@ -238,7 +251,6 @@ export default {
 // this.$q.sessionStorage.set(key, value)
 // let value = this.$q.sessionStorage.getItem(key)
 </script>
-
 
 <style lang="stylus">
 .log
