@@ -31,7 +31,6 @@
                     </q-btn>
                 </template>
             </q-select>
-
             <q-btn
                 rounded
                 :icon="device_ready ? 'phonelink_off' : 'phonelink'"
@@ -51,6 +50,7 @@
                 </template>
             </q-btn>
         </section>
+
         <section class="log q-mt-md q-pa-sm">
             <div
                 class="line row"
@@ -58,9 +58,9 @@
                 :key="index"
             >
                 <div class="info q-px-sm">
-                    {{ index }}
+                    {{ line.time | timeOnly }} {{ line.direction }}
                 </div>
-                <pre class="col-grow">{{ line }}</pre>
+                <pre class="col-grow">{{ line.text }}</pre>
             </div>
         </section>
         <section
@@ -122,6 +122,8 @@
 </style>
 
 <script>
+import { date } from 'quasar'
+
 export default {
     name: 'HidTest',
     data () {
@@ -140,23 +142,28 @@ export default {
             messagae_to_send: 'Hello World :-)',
             log: [
                 {
-                    time: "2019-06-02T11:42:42.000Z",
+                    direction: '*',
+                    time: '2019-06-02T11:42:42.000Z',
                     text: 'First Line'
                 },
                 {
-                    time: "2019-06-02T11:42:42.000Z",
+                    direction: '*',
+                    time: '2019-06-02T11:42:42.010Z',
                     text: 'second line'
                 },
                 {
-                    time: "2019-06-02T11:42:42.000Z",
+                    direction: '*',
+                    time: '2019-06-02T11:42:42.102Z',
                     text: 'line with\nmultiline\n content'
                 },
                 {
-                    time: "2019-06-02T11:42:42.000Z",
+                    direction: '*',
+                    time: '2019-06-02T11:42:42.200Z',
                     text: ''
                 },
                 {
-                    time: "2019-06-02T11:42:42.000Z",
+                    direction: '*',
+                    time: '2019-06-02T11:42:42.420Z',
                     text: `this 'line' contains a full unicode styled table:
 ╔════════════════╦═══════╦══════╗
 ║      Name      ║ Value ║ Unit ║
@@ -166,7 +173,8 @@ export default {
 ╚════════════════╩═══════╩══════╝`
                 },
                 {
-                    time: "2019-06-02T11:42:42.000Z",
+                    direction: '*',
+                    time: '2019-06-02T11:43:00.000Z',
                     text: 'the end..'
                 }
             ]
@@ -186,8 +194,9 @@ export default {
             console.log('send message:', this.messagae_to_send)
             // TODO(s-light): implement sending
             const logEntry = {
+                direction: '>',
                 time: new Date(),
-                text: '>' + this.messagae_to_send
+                text: this.messagae_to_send
             }
             this.log.push(logEntry)
             if (this.device_selected === 'dummyResponder') {
@@ -202,6 +211,7 @@ export default {
         messageReceive (value) {
             // console.log('receive message:', value)
             const logEntry = {
+                direction: '<',
                 time: new Date(),
                 text: value
             }
@@ -221,6 +231,19 @@ export default {
         // example_computed: function () {
         //     return
         // }
+    },
+    filters: {
+        timeOnly: function (value) {
+            // console.log('value', value)
+            const timeStamp = new Date(value)
+            // console.log('timeStamp', timeStamp)
+            let result = ''
+            if (date.isValid(timeStamp)) {
+                // https://quasar.dev/quasar-utils/date-utils#Format-for-display
+                result = date.formatDate(timeStamp, 'HH:mm:ss.SSS')
+            }
+            return result
+        }
     }
 }
 
