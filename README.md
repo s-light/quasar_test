@@ -36,6 +36,12 @@ how to use & install this repository
     /helloworld$ npm install
     # ....
     ```
+- rebuild [native modules](https://electronjs.org/docs/tutorial/using-native-node-modules)
+    ```bash
+    # Every time you run "npm install", run this:
+    /helloworld$ ./node_modules/.bin/electron-rebuild
+    # ....
+    ```
 - then start the SPA app in dev mode
     ```bash
     /helloworld$ quasar dev
