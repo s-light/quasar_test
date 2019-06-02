@@ -97,32 +97,53 @@
     </q-page>
 </template>
 
-<style lang="stylus">
-.log
-    flex-grow: 2
-    min-width: 50vw
-    max-width: 100vw
-    overflow: auto
-    background-color: hsla(0, 0, 0, 0.05)
-    /* white-space: pre */
-    font-size: 1em
-    line-height: 129%
-    font-family: Overpass-mono
-/* .line */
-.log .info
-    background $info
-    min-width 3em
-    text-align right
-.log pre
-    margin: 0
-    white-space: pre
-    font-size: 1em
-    line-height: 129%
-    font-family: Overpass-mono
-</style>
-
 <script>
 import { date } from 'quasar'
+
+// test import..
+var sp = require('serialport');
+sp.list(function(err, ports) {
+    console.log(ports);
+});
+
+const demoData = [
+    {
+        direction: '*',
+        time: '2019-06-02T11:42:42.000Z',
+        text: 'First Line'
+    },
+    {
+        direction: '*',
+        time: '2019-06-02T11:42:42.010Z',
+        text: 'second line'
+    },
+    {
+        direction: '*',
+        time: '2019-06-02T11:42:42.102Z',
+        text: 'line with\nmultiline\n content'
+    },
+    {
+        direction: '*',
+        time: '2019-06-02T11:42:42.200Z',
+        text: ''
+    },
+    {
+        direction: '*',
+        time: '2019-06-02T11:42:42.420Z',
+        text: `this 'line' contains a full unicode styled table:
+╔════════════════╦═══════╦══════╗
+║      Name      ║ Value ║ Unit ║
+╠════════════════╬═══════╬══════╣
+║ Ambient Light  ║    42 ║ LUX  ║
+║ LED-Brightness ║    50 ║ %    ║
+╚════════════════╩═══════╩══════╝`
+    },
+    {
+        direction: '*',
+        time: '2019-06-02T11:43:00.000Z',
+        text: 'the end..'
+    }
+]
 
 export default {
     name: 'HidTest',
@@ -140,44 +161,7 @@ export default {
             device_connecting: false,
             device_ready: false,
             messagae_to_send: 'Hello World :-)',
-            log: [
-                {
-                    direction: '*',
-                    time: '2019-06-02T11:42:42.000Z',
-                    text: 'First Line'
-                },
-                {
-                    direction: '*',
-                    time: '2019-06-02T11:42:42.010Z',
-                    text: 'second line'
-                },
-                {
-                    direction: '*',
-                    time: '2019-06-02T11:42:42.102Z',
-                    text: 'line with\nmultiline\n content'
-                },
-                {
-                    direction: '*',
-                    time: '2019-06-02T11:42:42.200Z',
-                    text: ''
-                },
-                {
-                    direction: '*',
-                    time: '2019-06-02T11:42:42.420Z',
-                    text: `this 'line' contains a full unicode styled table:
-╔════════════════╦═══════╦══════╗
-║      Name      ║ Value ║ Unit ║
-╠════════════════╬═══════╬══════╣
-║ Ambient Light  ║    42 ║ LUX  ║
-║ LED-Brightness ║    50 ║ %    ║
-╚════════════════╩═══════╩══════╝`
-                },
-                {
-                    direction: '*',
-                    time: '2019-06-02T11:43:00.000Z',
-                    text: 'the end..'
-                }
-            ]
+            log: demoData
         }
     },
     methods: {
@@ -254,3 +238,28 @@ export default {
 // this.$q.sessionStorage.set(key, value)
 // let value = this.$q.sessionStorage.getItem(key)
 </script>
+
+
+<style lang="stylus">
+.log
+    flex-grow: 2
+    min-width: 50vw
+    max-width: 100vw
+    overflow: auto
+    background-color: hsla(0, 0, 0, 0.05)
+    /* white-space: pre */
+    font-size: 1em
+    line-height: 129%
+    font-family: Overpass-mono
+/* .line */
+.log .info
+    background $info
+    min-width 3em
+    text-align right
+.log pre
+    margin: 0
+    white-space: pre
+    font-size: 1em
+    line-height: 129%
+    font-family: Overpass-mono
+</style>
