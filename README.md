@@ -39,7 +39,7 @@ how to use & install this repository
 - rebuild [native modules](https://electronjs.org/docs/tutorial/using-native-node-modules)
     ```bash
     # Every time you run "npm install", run this:
-    /helloworld$ ./node_modules/.bin/electron-rebuild
+    /helloworld$ $(npm bin)/electron-rebuild
     # ....
     ```
 - then start the SPA app in dev mode
