@@ -1,5 +1,8 @@
 <template>
-    <q-page class="flex column" style="align-items: center;">
+    <q-page
+        class="flex column"
+        style="align\-items: center;"
+    >
         <section style="margin-top: 1em;">
             <q-editor
                 v-model="qeditor"
@@ -56,6 +59,7 @@
             />
         </section>
         <section>
+            <!-- eslint-disable-next-line -->
             <div class="my-pre">{{ qeditor }}</div>
             <!-- <div class="my-pre">{{ message_formated | prettyprint }}</div> -->
         </section>

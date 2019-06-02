@@ -1,5 +1,8 @@
 <template>
-    <q-page class="flex column" style="align-items: center;">
+    <q-page
+        class="flex column"
+        style="align-items: center;"
+    >
         <section>
             <h4>Quasar Tests</h4>
             <p>

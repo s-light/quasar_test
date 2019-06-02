@@ -42,6 +42,8 @@ module.exports = function (ctx) {
                 'QSelect',
                 'QToggle',
                 'QSlider',
+                'QSpinnerGears',
+                'QSpinnerRadio',
                 'QBadge'
             ],
 

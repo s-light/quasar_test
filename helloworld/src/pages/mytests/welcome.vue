@@ -1,5 +1,8 @@
 <template>
-    <q-page class="flex column" style="align-items: center;">
+    <q-page
+        class="flex column"
+        style="align-items: center;"
+    >
         <img
             alt="App-Logo"
             src="~assets/logo_test3_splashscreen.svg"
