@@ -89,6 +89,7 @@
                         dense
                         flat
                         icon="send"
+                        :disable="!device_ready"
                         @click="messageSend()"
                     />
                 </template>
