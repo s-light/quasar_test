@@ -4,7 +4,7 @@
         style="align-items: center;"
     >
         <section class="q-mt-md row justify-around items-center ">
-            <q-select
+            <!-- <q-select
                 rounded
                 outlined
                 class="q-mr-md"
@@ -13,7 +13,7 @@
                 option-label="comName"
                 v-model="deviceSelected"
                 :options="deviceList"
-                :disable="deviceConnected"
+                :disable="portIsOpen"
             >
                 <template v-slot:no-option>
                     <q-item>
@@ -29,7 +29,42 @@
                         dense
                         hint="search devices"
                         icon="refresh"
-                        :disable="deviceConnected"
+                        :disable="portIsOpen"
+                        :loading="deviceSearching"
+                        @click="search()"
+                    >
+                        <template v-slot:loading>
+                            <q-spinner-radio />
+                        </template>
+                    </q-btn>
+                </template>
+            </q-select> -->
+
+            <q-select
+                rounded
+                outlined
+                class="q-mr-md"
+                style="min-width:12em; background: transparent"
+                label="Device"
+                v-model="deviceSelected"
+                :options="deviceNamesList"
+                :disable="portIsOpen"
+            >
+                <template v-slot:no-option>
+                    <q-item>
+                        <q-item-section>
+                            No Devices
+                        </q-item-section>
+                    </q-item>
+                </template>
+                <template v-slot:append>
+                    <q-btn
+                        flat
+                        round
+                        dense
+                        hint="search devices"
+                        icon="refresh"
+                        :disable="portIsOpen"
                         :loading="deviceSearching"
                         @click="search()"
                     >
@@ -39,13 +74,40 @@
                     </q-btn>
                 </template>
             </q-select>
+
+            <!-- <q-select
+                style="min-width:12em"
+                label="Device"
+                option-label="comName"
+                v-model="testXX"
+                :options="deviceList"
+            />
+
+            <p>{{ testXX }}</p>
+
+            <q-btn
+                flat
+                round
+                dense
+                hint="search devices"
+                icon="refresh"
+                :disable="portIsOpen"
+                :loading="deviceSearching"
+                @click="search()"
+            >
+                <template v-slot:loading>
+                    <q-spinner-radio />
+                </template>
+            </q-btn>
+            -->
+
             <q-btn
                 rounded
-                :icon="deviceConnected ? 'phonelink_off' : 'phonelink'"
+                :icon="portIsOpen ? 'phonelink_off' : 'phonelink'"
                 :style="{opacity: (deviceSelected ? 'inherit' : '0.05')}"
                 :loading="deviceConnecting"
                 @click="toggleConnect()"
-                :label="deviceConnected ? 'disconnect' : 'connect'"
+                :label="portIsOpen ? 'disconnect' : 'connect'"
                 :disable="!deviceSelected"
             >
                 <template v-slot:loading>
@@ -57,6 +119,11 @@
                     />
                 </template>
             </q-btn>
+            <p class="q-ma-md">
+                {{ deviceSelected }}
+                <!-- {{ deviceSelected.comName }}
+                {{ deviceSelected.pnpId }} -->
+            </p>
         </section>
 
         <section class="log q-mt-md q-pa-sm">
@@ -79,7 +146,7 @@
                 filled
                 label="Send Message"
                 v-model="messagaeToSend"
-                :disable="!deviceConnected"
+                :disable="!portIsOpen"
                 @keyup.enter="messageSend()"
             >
                 <template v-slot:append>
@@ -97,7 +164,7 @@
                         dense
                         flat
                         icon="send"
-                        :disable="!deviceConnected"
+                        :disable="!portIsOpen"
                         @click="messageSend()"
                     />
                 </template>
@@ -108,18 +175,6 @@
 
 <script>
 import { date } from 'quasar'
-
-// Serial things
-// import { SerialPort } from 'serialport'
-// ^ this does not work in SPA
-let SerialPort
-// import('serialport')
-//     .then(module => {
-//         SerialPort = module
-//     })
-//     .catch(err => {
-//         console.error('import serialport\n', err)
-//     })
 
 const demoData = [
     {
@@ -156,7 +211,7 @@ const demoData = [
 ]
 
 export default {
-    name: 'SerialTest',
+    name: 'PageSerialTest',
     data () {
         return {
             serialAvailable: false,
@@ -171,10 +226,15 @@ export default {
                 productId: undefined,
                 vendorId: undefined
             }],
-            deviceSelected: undefined,
+            // deviceSelected: {
+            //     comName: '',
+            //     pnpId: undefined
+            // },
+            deviceSelected: 'dummyResponder',
+            portIsOpen: false,
+            // testXX: 'XXX',
             deviceSearching: false,
             deviceConnecting: false,
-            deviceConnected: false,
             messagaeToSend: 'Hello World :-)',
             log: demoData,
             logCountMax: 500
@@ -182,49 +242,80 @@ export default {
     },
     methods: {
         toggleConnect () {
+            console.group('toggleConnect()')
             this.deviceConnecting = true
-            if (this.deviceSelected.comName.startsWith('dummyResponder')) {
-                // simulate a delay
+            // console.log('this.deviceConnecting', this.deviceConnecting)
+            // console.log('this.portIsOpen', this.portIsOpen)
+            if (this.portIsOpen) {
+                console.log('we will close now..')
+                this.portClose()
+            } else {
+                console.log('we will open now..')
+                this.portOpen()
+            }
+            console.groupEnd()
+        },
+        portOpen () {
+            console.group('portOpen()')
+            // console.log(`this.deviceSelected.comName '${this.deviceSelected.comName}'`)
+            console.log(`this.deviceSelected '${this.deviceSelected}'`)
+            // if (this.deviceSelected.comName.startsWith('dummyResponder')) {
+            if (this.deviceSelected.startsWith('dummyResponder')) {
                 setTimeout(() => {
                     // we're done, we reset loading state
                     this.deviceConnecting = false
-                    this.deviceConnected = !this.deviceConnected
-                }, 1000)
+                    this.portIsOpen = true
+                }, 500)
             } else {
-                if (this.deviceConnected) {
-                    this.portClose()
-                } else {
-                    this.portOpen()
+                if (this.serialAvailable) {
+                    try {
+                        this.port = new SerialPort(
+                            this.deviceSelected, { baudRate: 115200 })
+                        // this.deviceSelected.comName, { baudRate: 115200 })
+                        this.port.pipe(this.parser)
+                        this.port.on('open', () => {
+                            // console.log('event open - port.isOpen:', this.port.isOpen)
+                            console.log('event open')
+                            this.portIsOpen = this.port.isOpen
+                            this.deviceConnecting = false
+                        })
+                        this.port.on('close', () => {
+                            // console.log('event close - port.isOpen:', this.port.isOpen)
+                            console.log('event close')
+                            this.portIsOpen = this.port.isOpen
+                            this.deviceConnecting = false
+                        })
+                    } catch (e) {
+                        console.error('port open failed:\n', e)
+                        this.deviceConnecting = false
+                    }
                 }
             }
-        },
-        portOpen () {
-            if (this.serialAvailable) {
-                this.port = new SerialPort(
-                    this.deviceSelected.comName, { baudRate: 115200 })
-                this.port.pipe(this.parser)
-                this.port.on('open', function () {
-                    this.deviceConnected = true
-                    this.deviceConnecting = false
-                })
-                this.port.on('close', function () {
-                    this.deviceConnected = false
-                    this.deviceConnecting = false
-                })
-            }
+            console.groupEnd()
         },
         portClose () {
-            if (this.serialAvailable) {
-                this.port.close()
+            // if (this.deviceSelected.comName.startsWith('dummyResponder')) {
+            if (this.deviceSelected.startsWith('dummyResponder')) {
+                setTimeout(() => {
+                    // we're done, we reset loading state
+                    this.deviceConnecting = false
+                    this.portIsOpen = false
+                }, 500)
+            } else {
+                if (this.serialAvailable && this.port) {
+                    this.deviceConnecting = false
+                    this.port.close()
+                }
             }
         },
         messageSend () {
             // console.log('send message:', this.messagaeToSend)
-            if (this.deviceSelected.comName.startsWith('dummyResponder')) {
+            // if (this.deviceSelected.comName.startsWith('dummyResponder')) {
+            if (this.deviceSelected.startsWith('dummyResponder')) {
                 const recMessage = this.messagaeToSend
                 setTimeout(() => {
                     this.messageReceive(recMessage)
-                }, 500)
+                }, 1000)
             } else {
                 if (this.serialAvailable) {
                     this.port.write(this.messagaeToSend + '\n')
@@ -254,8 +345,8 @@ export default {
             }
         },
         search () {
-            this.deviceSearching = true
             if (this.serialAvailable) {
+                this.deviceSearching = true
                 SerialPort.list().then(
                     ports => {
                         // ports.forEach(console.log)
@@ -269,24 +360,22 @@ export default {
                             productId: undefined,
                             vendorId: undefined
                         }]
-                        this.deviceList.push(...ports)
+                        // this.deviceList.push(...ports)
+                        for (let port of ports) {
+                            if (port.vendorId) {
+                                // console.log(port)
+                                this.deviceList.push(port)
+                            }
+                        }
+                        // this.deviceSelected = this.deviceList[this.deviceList.length - 1]
+                        this.deviceSelected = this.deviceNamesList[this.deviceNamesList.length - 1]
+                        this.deviceSearching = false
                     },
                     err => {
                         console.error('serialport.list:', err)
                         this.deviceSearching = false
                     }
                 )
-                // SerialPort.list((err, ports) => {
-                //     console.log('ports', ports)
-                //     if (err) {
-                //         console.error('serialport.list:', err)
-                //     } else {
-                //         // reset list
-                //         this.deviceList = ['dummyResponder']
-                //         this.deviceList.push(...ports)
-                //     }
-                //     this.deviceSearching = false
-                // })
             } else {
                 // simulate a delay
                 setTimeout(() => {
@@ -306,15 +395,20 @@ export default {
         }
     },
     computed: {
-        // example_computed: function () {
-        //     return
-        // }
+        deviceNamesList: function () {
+            let result = []
+            for (let port of this.deviceList) {
+                result.push(port.comName)
+            }
+            return result
+        }
     },
     mounted: function () {
-        console.log('mounted..')
-        this.deviceSelected = this.deviceList[0]
+        // console.group('mounted..')
+        // this.deviceSelected = this.deviceList[0]
+        this.deviceSelected = this.deviceNamesList[0]
         if (SerialPort) {
-            console.log('try setup SerialPort usage..')
+            // console.group('setup SerialPort usage')
             try {
                 const Readline = SerialPort.parsers.Readline
                 this.parser = new Readline()
@@ -324,11 +418,21 @@ export default {
                 this.serialAvailable = false
                 console.error(e)
             }
-            console.log('search for devices..')
+            // console.log('search for devices..')
             this.search()
-            console.log('setup done.')
+            // console.groupEnd()
         }
-        console.log('mounted - done')
+        // console.groupEnd()
+    },
+    beforeDestroy: function () {
+        console.group('beforeDestroy..')
+        if (this.serialAvailable) {
+            if (this.port && this.port.isOpen) {
+                console.group('close ports.')
+                this.port.close()
+            }
+        }
+        console.groupEnd()
     },
     filters: {
         timeOnly: function (value) {
@@ -356,15 +460,16 @@ export default {
 <style lang="stylus">
     .log
         flex-grow: 2
+        align-self: stretch
         min-width: 50vw
         max-width: 100vw
+        max-height: calc(100vh - 15em);
+        min-height: 5em;
         overflow: auto
         background-color: hsla(0, 0, 0, 0.05)
-        /* white-space: pre */
         font-size: 1em
         line-height: 129%
         font-family: Overpass-mono
-    /* .line */
     .log .info
         background $info
         min-width 3em
