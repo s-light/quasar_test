@@ -1,13 +1,18 @@
 let SerialPort
-if (process.versions.electron) {
-    // eslint-disable-next-line no-console
-    console.info('Running electron → importing SerialPort')
-    try {
-        SerialPort = require('serialport')
-    } catch (e) {
+try {
+    if (process.versions.electron) {
         // eslint-disable-next-line no-console
-        console.error('Patch with SerialPort failed:\n', e)
+        console.info('Running electron → importing SerialPort')
+        try {
+            SerialPort = require('serialport')
+        } catch (e) {
+            // eslint-disable-next-line no-console
+            console.error('importing SerialPort failed:\n', e)
+        }
     }
+} catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('load_native_modules failed:\n', e)
 }
 
 if (SerialPort) {

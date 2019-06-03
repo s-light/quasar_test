@@ -4,7 +4,7 @@
         style="align-items: center;"
     >
         <section class="q-mt-md">
-            SerialPort: {{ SerialPort }}
+            SerialPort: {{ serialPortAvailable }}
         </section>
         <q-btn
             v-ripple
@@ -28,6 +28,7 @@ export default {
     name: 'SerialList',
     data () {
         return {
+            serialPortAvailable: false,
             deviceList: [{
                 comName: 'dummyResponder'
             }]
@@ -60,6 +61,9 @@ export default {
     },
     mounted: function () {
         this.updatePortList()
+        if (SerialPort) {
+            this.serialPortAvailable = true
+        }
     }
 }
 </script>
