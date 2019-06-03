@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([["2e58429f"],{"8b24":function(e,t,s){"use strict";s.r(t);var n={name:"PageIndex"},l=s("2877"),a=Object(l.a)(n,function(){var e=this.$createElement,t=this._self._c||e;return t("q-page",{staticClass:"flex flex-center"},[t("img",{attrs:{alt:"App-Logo",src:s("e9bd")}}),t("h1",[this._v("Hello World :-)")])])},[],!1,null,null,null);t.default=a.exports},e9bd:function(e,t,s){e.exports=s.p+"img/logo_test3_splashscreen.5e43c2d5.svg"}}]);
-//# sourceMappingURL=2e58429f.ed1fbe87.js.map

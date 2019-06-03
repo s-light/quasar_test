@@ -1,0 +1,27 @@
+.log {
+  flex-grow: 2;
+  min-width: 50vw;
+  max-width: 100vw;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.05);
+/* white-space: pre */
+  font-size: 1em;
+  line-height: 129%;
+  font-family: Overpass-mono;
+}
+/* .line */
+.log .info {
+  background: #a6c5ff;
+  min-width: 3em;
+  text-align: right;
+}
+.log pre {
+  margin: 0;
+  white-space: pre;
+  font-size: 1em;
+  line-height: 129%;
+  font-family: Overpass-mono;
+}
+/*# sourceMappingURL=src/pages/mytests/serial.css.map */
+
+/*# sourceMappingURL=05fa12b0.d492617f.css.map*/
