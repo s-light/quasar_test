@@ -16,6 +16,7 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "quasar": "^1.0.0-beta.0",
+    "electron-rebuild": "^1.8.5",
     "serialport": "^7.1.5"
   },
   "devDependencies": {
@@ -29,7 +30,6 @@
     "electron-debug": "^2.1.0",
     "electron-devtools-installer": "^2.2.4",
     "electron-packager": "^13.1.0",
-    "electron-rebuild": "^1.8.5",
     "eslint": "^5.10.0",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-vue": "^5.0.0",

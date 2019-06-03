@@ -78,9 +78,9 @@ module.exports = function (ctx) {
                     loader: 'eslint-loader',
                     exclude: /node_modules/
                 })
-                cfg.externals = {
-                    serialport: 'serialport'
-                }
+                // cfg.externals = {
+                //     serialport: 'serialport'
+                // }
             }
         },
 
@@ -149,6 +149,9 @@ module.exports = function (ctx) {
             extendWebpack (cfg) {
                 // do something with Electron main process Webpack cfg
                 // chainWebpack also available besides this extendWebpack
+                // cfg.externals = {
+                //     serialport: 'serialport'
+                // }
             },
 
             packager: {

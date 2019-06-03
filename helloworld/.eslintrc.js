@@ -25,9 +25,9 @@ module.exports = {
 
   globals: {
     'ga': true, // Google Analytics
-    'SerialPort': true,
     'cordova': true,
     '__statics': true,
+    'SerialPort': true,
     'process': true
   },
 
