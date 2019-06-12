@@ -45,6 +45,9 @@ export default {
     computed: {},
     mounted: function () {
         console.group('mounted')
+        if (HID) {
+            this.hid_device_list = HID.devices()
+        }
         console.groupEnd()
     },
     beforeDestroy: function () {
