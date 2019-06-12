@@ -140,7 +140,7 @@
                 filled
                 label="Send Message"
                 v-model="messagaeToSend"
-                :disable="!deviceIsOpen"
+                :disable="!deviceIsOpen || deviceConnecting"
                 @keyup.enter="messageSend()"
             >
                 <template v-slot:append>
@@ -158,7 +158,7 @@
                         dense
                         flat
                         icon="send"
-                        :disable="!deviceIsOpen"
+                        :disable="!deviceIsOpen || deviceConnecting"
                         @click="messageSend()"
                     />
                 </template>
