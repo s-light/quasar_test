@@ -25,6 +25,7 @@ how to use & install this repository
         v12.3.1
         ```
     - check [Resolving EACCES permissions errors when installing packages globally](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
+    - [yarn installed](https://yarnpkg.com/)
     - [quasar installed](https://quasar.dev/quasar-cli/installation)  
         ```bash
         $ npm install -g @quasar/cli
@@ -39,13 +40,7 @@ how to use & install this repository
     ```
 - install requirements
     ```bash
-    /helloworld$ npm install
-    # ....
-    ```
-- rebuild [native modules](https://electronjs.org/docs/tutorial/using-native-node-modules)
-    ```bash
-    # Every time you run "npm install", run this:
-    /helloworld$ $(npm bin)/electron-rebuild
+    /helloworld$ yarn
     # ....
     ```
 - then start the SPA app in dev mode
@@ -53,4 +48,9 @@ how to use & install this repository
     /helloworld$ quasar dev
     # ....
     # browser opens and you can use the app ;-)
+    ```
+- or as electron app
+    ```bash
+    /helloworld$ quasar dev
+    # ....
     ```
