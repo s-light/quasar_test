@@ -9,8 +9,7 @@ for the SPA (single Page Application) Web-Version you can go to:
 [https://s-light.github.io/quasar_test/helloworld/dist/spa/#/](https://s-light.github.io/quasar_test/helloworld/dist/spa/)
 
 ## getting started
-if you are new to quasar and so i recommend this tutorial:
-https://github.com/hawkeye64/electron-quasar-file-explorer
+if you are new to quasar and so i recommend [this tutorial](https://github.com/hawkeye64/electron-quasar-file-explorer)
 
 and of course all the other getting-started guides...
 
@@ -51,6 +50,6 @@ how to use & install this repository
     ```
 - or as electron app
     ```bash
-    /helloworld$ quasar dev
+    /helloworld$ quasar dev --mode electron
     # ....
     ```

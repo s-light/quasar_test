@@ -28,6 +28,7 @@ module.exports = {
     'cordova': true,
     '__statics': true,
     'SerialPort': true,
+    'HID': true,
     'process': true
   },
 

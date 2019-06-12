@@ -78,9 +78,10 @@ module.exports = function (ctx) {
                     loader: 'eslint-loader',
                     exclude: /node_modules/
                 })
-                // cfg.externals = {
-                //     serialport: 'serialport'
-                // }
+                cfg.externals = {
+                    serialport: 'serialport',
+                    'node-hid': 'commonjs node-hid'
+                }
             }
         },
 

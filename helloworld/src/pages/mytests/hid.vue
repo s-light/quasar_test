@@ -6,20 +6,18 @@
         <section style="margin-top: 1em;">
             <q-btn
                 filled
-                label="Find Devices"
-                @click="find_devices()"
+                label="Search Devices"
+                @click="search()"
             />
-            <div class="">
-                {{ hid_device_list }}
-            </div>
-            <ul>
+            <pre class="">{{ hid_device_list }}</pre>
+            <!-- <ul>
                 <li
                     v-for="(device, index) in hid_device_list"
                     :key="index"
                 >
                     {{ device }}
                 </li>
-            </ul>
+            </ul> -->
         </section>
     </q-page>
 </template>
@@ -29,11 +27,31 @@
 
 <script>
 export default {
-    name: 'HidTest',
+    name: 'PageHidTest',
     data () {
         return {
             hid_device_list: []
         }
+    },
+    methods: {
+        search () {
+            console.group('search for devices..')
+            if (HID) {
+                this.hid_device_list = HID.devices()
+            }
+            console.groupEnd()
+        }
+    },
+    computed: {},
+    mounted: function () {
+        console.group('mounted')
+        console.groupEnd()
+    },
+    beforeDestroy: function () {
+        // console.group('beforeDestroy..')
+        // console.groupEnd()
+    },
+    filters: {
     }
 }
 
