@@ -13,7 +13,7 @@
                 option-label="comName"
                 v-model="deviceSelected"
                 :options="deviceList"
-                :disable="portIsOpen"
+                :disable="deviceIsOpen"
             >
                 <template v-slot:no-option>
                     <q-item>
@@ -29,7 +29,7 @@
                         dense
                         hint="search devices"
                         icon="refresh"
-                        :disable="portIsOpen"
+                        :disable="deviceIsOpen"
                         :loading="deviceSearching"
                         @click="search()"
                     >
@@ -48,7 +48,7 @@
                 label="Device"
                 v-model="deviceSelected"
                 :options="deviceNamesList"
-                :disable="portIsOpen"
+                :disable="deviceIsOpen"
             >
                 <template v-slot:no-option>
                     <q-item>
@@ -64,7 +64,7 @@
                         dense
                         hint="search devices"
                         icon="refresh"
-                        :disable="portIsOpen"
+                        :disable="deviceIsOpen"
                         :loading="deviceSearching"
                         @click="search()"
                     >
@@ -91,7 +91,7 @@
                 dense
                 hint="search devices"
                 icon="refresh"
-                :disable="portIsOpen"
+                :disable="deviceIsOpen"
                 :loading="deviceSearching"
                 @click="search()"
             >
@@ -103,11 +103,11 @@
 
             <q-btn
                 rounded
-                :icon="portIsOpen ? 'phonelink_off' : 'phonelink'"
+                :icon="deviceIsOpen ? 'phonelink_off' : 'phonelink'"
                 :style="{opacity: (deviceSelected ? 'inherit' : '0.05')}"
                 :loading="deviceConnecting"
                 @click="toggleConnect()"
-                :label="portIsOpen ? 'disconnect' : 'connect'"
+                :label="deviceIsOpen ? 'disconnect' : 'connect'"
                 :disable="!deviceSelected"
             >
                 <template v-slot:loading>
@@ -140,7 +140,7 @@
                 filled
                 label="Send Message"
                 v-model="messagaeToSend"
-                :disable="!portIsOpen"
+                :disable="!deviceIsOpen"
                 @keyup.enter="messageSend()"
             >
                 <template v-slot:append>
@@ -158,7 +158,7 @@
                         dense
                         flat
                         icon="send"
-                        :disable="!portIsOpen"
+                        :disable="!deviceIsOpen"
                         @click="messageSend()"
                     />
                 </template>
@@ -175,7 +175,7 @@ export default {
     data () {
         return {
             serialAvailable: false,
-            port: undefined,
+            device: undefined,
             parser: undefined,
             deviceList: [{
                 comName: 'dummyResponder',
@@ -191,7 +191,7 @@ export default {
             //     pnpId: undefined
             // },
             deviceSelected: 'dummyResponder',
-            portIsOpen: false,
+            deviceIsOpen: false,
             // testXX: 'XXX',
             deviceSearching: false,
             deviceConnecting: false,
@@ -204,18 +204,19 @@ export default {
             console.group('toggleConnect()')
             this.deviceConnecting = true
             // console.log('this.deviceConnecting', this.deviceConnecting)
-            // console.log('this.portIsOpen', this.portIsOpen)
-            if (this.portIsOpen) {
+            // console.log('this.deviceIsOpen', this.deviceIsOpen)
+            if (this.deviceIsOpen) {
                 console.log('we will close now..')
-                this.portClose()
+                this.deviceClose()
+                console.log('close done.')
             } else {
                 console.log('we will open now..')
-                this.portOpen()
+                this.deviceOpen()
             }
             console.groupEnd()
         },
-        portOpen () {
-            console.group('portOpen()')
+        deviceOpen () {
+            console.group('deviceOpen()')
             // console.log(`this.deviceSelected.comName '${this.deviceSelected.comName}'`)
             console.log(`this.deviceSelected '${this.deviceSelected}'`)
             // if (this.deviceSelected.comName.startsWith('dummyResponder')) {
@@ -223,25 +224,25 @@ export default {
                 setTimeout(() => {
                     // we're done, we reset loading state
                     this.deviceConnecting = false
-                    this.portIsOpen = true
+                    this.deviceIsOpen = true
                 }, 500)
             } else {
                 if (this.serialAvailable) {
                     try {
-                        this.port = new SerialPort(
+                        this.device = new SerialPort(
                             this.deviceSelected, { baudRate: 115200 })
                         // this.deviceSelected.comName, { baudRate: 115200 })
-                        this.port.pipe(this.parser)
-                        this.port.on('open', () => {
-                            // console.log('event open - port.isOpen:', this.port.isOpen)
+                        this.device.pipe(this.parser)
+                        this.device.on('open', () => {
+                            // console.log('event open - port.isOpen:', this.device.isOpen)
                             console.log('event open')
-                            this.portIsOpen = this.port.isOpen
+                            this.deviceIsOpen = this.device.isOpen
                             this.deviceConnecting = false
                         })
-                        this.port.on('close', () => {
-                            // console.log('event close - port.isOpen:', this.port.isOpen)
+                        this.device.on('close', () => {
+                            // console.log('event close - port.isOpen:', this.device.isOpen)
                             console.log('event close')
-                            this.portIsOpen = this.port.isOpen
+                            this.deviceIsOpen = this.device.isOpen
                             this.deviceConnecting = false
                         })
                     } catch (e) {
@@ -252,18 +253,20 @@ export default {
             }
             console.groupEnd()
         },
-        portClose () {
+        deviceClose () {
             // if (this.deviceSelected.comName.startsWith('dummyResponder')) {
             if (this.deviceSelected.startsWith('dummyResponder')) {
                 setTimeout(() => {
                     // we're done, we reset loading state
                     this.deviceConnecting = false
-                    this.portIsOpen = false
+                    this.deviceIsOpen = false
                 }, 500)
             } else {
-                if (this.serialAvailable && this.port) {
-                    this.deviceConnecting = false
-                    this.port.close()
+                // console.log('this.device', this.device)
+                if (this.serialAvailable && this.device) {
+                    this.deviceConnecting = true
+                    this.device.close()
+                    // console.log('this.device', this.device)
                 }
             }
         },
@@ -277,7 +280,7 @@ export default {
                 }, 1000)
             } else {
                 if (this.serialAvailable) {
-                    this.port.write(this.messagaeToSend + '\n')
+                    this.device.write(this.messagaeToSend + '\n')
                 }
             }
             this.$refs.mylog.addEntryOut(this.messagaeToSend)
@@ -293,8 +296,8 @@ export default {
             if (this.serialAvailable) {
                 this.deviceSearching = true
                 SerialPort.list().then(
-                    ports => {
-                        // ports.forEach(console.log)
+                    devices => {
+                        // devices.forEach(console.log)
                         // reset list
                         this.deviceList = [{
                             comName: 'dummyResponder',
@@ -305,11 +308,11 @@ export default {
                             productId: undefined,
                             vendorId: undefined
                         }]
-                        // this.deviceList.push(...ports)
-                        for (let port of ports) {
-                            if (port.vendorId) {
-                                // console.log(port)
-                                this.deviceList.push(port)
+                        // this.deviceList.push(...devices)
+                        for (let device of devices) {
+                            if (device.vendorId) {
+                                // console.log(device)
+                                this.deviceList.push(device)
                             }
                         }
                         // this.deviceSelected = this.deviceList[this.deviceList.length - 1]
@@ -372,9 +375,9 @@ export default {
     beforeDestroy: function () {
         console.group('beforeDestroy..')
         if (this.serialAvailable) {
-            if (this.port && this.port.isOpen) {
-                console.group('close ports.')
-                this.port.close()
+            if (this.device && this.device.isOpen) {
+                console.group('close devices.')
+                this.device.close()
             }
         }
         console.groupEnd()
