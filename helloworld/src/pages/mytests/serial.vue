@@ -129,13 +129,9 @@
         <LogView
             class="q-mt-md q-pa-sm"
             ref="mylog"
+            show-demo-data
+            :log.sync="log"
         />
-        <!--
-        <LogView
-            class="q-mt-md q-pa-sm"
-            ref="mylog"
-            v-bind:log.sync="log"
-        /> -->
         <section
             class="q-mt-md"
             style="min-width: 50vw"
@@ -199,8 +195,8 @@ export default {
             // testXX: 'XXX',
             deviceSearching: false,
             deviceConnecting: false,
-            messagaeToSend: 'Hello World :-)'
-            // log: undefined
+            messagaeToSend: 'Hello World :-)',
+            log: undefined
         }
     },
     methods: {

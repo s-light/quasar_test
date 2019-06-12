@@ -21,8 +21,8 @@
         </section>
         <LogView
             class="q-mt-md q-pa-sm"
-            :log="log"
             ref="mylog"
+            :log.sync="log"
         />
     </q-page>
 </template>
@@ -37,8 +37,8 @@ export default {
     name: 'PageHidTest',
     data () {
         return {
-            hid_device_list: []
-            // log: undefined
+            hid_device_list: [],
+            log: []
         }
     },
     methods: {
@@ -53,6 +53,7 @@ export default {
     computed: {},
     mounted: function () {
         console.group('mounted')
+        this.$refs.mylog.addEntryComment('app mounted.')
         if (HID) {
             this.hid_device_list = HID.devices()
         }

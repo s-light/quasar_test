@@ -1,10 +1,27 @@
+
+<!-- usage:
+
+<LogView
+    class="q-mt-md q-pa-sm"
+    ref="mylog"
+    logCountMax="500"
+    directionInSymbol="→"
+    directionOutSymbol="*"
+    directionSpecialSymbol="~"
+    directionCommentSymbol="#"
+    showDemoData
+    v-bind:log.sync="log"
+/>
+
+-->
+
 <template>
     <section
         class="log"
     >
         <div
             class="line row"
-            v-for="(line, index) in log"
+            v-for="(line, index) in logInternal"
             :key="index"
         >
             <div class="info q-px-sm">
@@ -79,12 +96,12 @@ const demoData = [
 
 export default {
     props: {
-        // log: {
-        //     type: Array,
-        //     default: function () {
-        //         return demoData
-        //     }
-        // },
+        log: {
+            type: Array,
+            default: function () {
+                return []
+            }
+        },
         logCountMax: {
             type: Number,
             default: 500
@@ -106,11 +123,15 @@ export default {
         directionCommentSymbol: {
             type: String,
             default: '#'
+        },
+        showDemoData: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
         return {
-            log: demoData
+            logInternal: []
         }
     },
     computed: {
@@ -122,12 +143,12 @@ export default {
                 time: time,
                 text: text
             }
-            this.log.push(logEntry)
+            this.logInternal.push(logEntry)
             // limit log length
-            while (this.log.length > this.logCountMax) {
-                this.log.shift()
+            while (this.logInternal.length > this.logCountMax) {
+                this.logInternal.shift()
             }
-            this.$emit('update:log', this.log)
+            this.$emit('update:log', this.logInternal)
         },
         addEntryOut: function (text) {
             this.addEntry(
@@ -158,12 +179,17 @@ export default {
             )
         },
         clear: function () {
-            this.log = []
+            this.logInternal = []
         }
     },
     watch: {
     },
     mounted: function () {
+        if (this.showDemoData) {
+            this.logInternal = demoData
+        } else {
+            this.logInternal = this.log
+        }
     },
     filters: {
         timeOnly: function (value) {
