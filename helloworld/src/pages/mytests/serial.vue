@@ -4,52 +4,45 @@
         style="align-items: center;"
     >
         <section class="q-mt-md row justify-around items-center ">
-            <!-- <q-select
-                rounded
-                outlined
-                class="q-mr-md"
-                style="min-width:12em; background: transparent"
-                label="Device"
-                option-label="comName"
-                v-model="deviceSelected"
-                :options="deviceList"
-                :disable="deviceIsOpen"
-            >
-                <template v-slot:no-option>
-                    <q-item>
-                        <q-item-section>
-                            No Devices
-                        </q-item-section>
-                    </q-item>
-                </template>
-                <template v-slot:append>
-                    <q-btn
-                        flat
-                        round
-                        dense
-                        hint="search devices"
-                        icon="refresh"
-                        :disable="deviceIsOpen"
-                        :loading="deviceSearching"
-                        @click="search()"
-                    >
-                        <template v-slot:loading>
-                            <q-spinner-radio />
-                        </template>
-                    </q-btn>
-                </template>
-            </q-select> -->
-
             <q-select
                 rounded
                 outlined
                 class="q-mr-md"
                 style="min-width:12em; background: transparent"
                 label="Device"
-                v-model="deviceSelected"
-                :options="deviceNamesList"
                 :disable="deviceIsOpen"
+                v-model="deviceSelected"
+                :option-label="(item) => item.comName"
+                :option-value="(item) => item"
+                :options="deviceList"
             >
+                <template v-slot:option="scope">
+                    <q-item
+                        v-bind="scope.itemProps"
+                        v-on="scope.itemEvents"
+                    >
+                        <q-item-section>
+                            <q-item-label>
+                                {{ scope.opt.comName }}
+                            </q-item-label>
+                            <q-item-label caption>
+                                {{ scope.opt.pnpId }}
+                            </q-item-label>
+                            <q-item-label caption>
+                                {{ scope.opt.manufacturer }}
+                            </q-item-label>
+                            <q-item-label caption>
+                                vendorId:{{ scope.opt.vendorId }}
+                            </q-item-label>
+                            <q-item-label caption>
+                                productId:{{ scope.opt.productId }}
+                            </q-item-label>
+                            <q-item-label caption>
+                                serialNumber:{{ scope.opt.serialNumber }}
+                            </q-item-label>
+                        </q-item-section>
+                    </q-item>
+                </template>
                 <template v-slot:no-option>
                     <q-item>
                         <q-item-section>
@@ -75,32 +68,6 @@
                 </template>
             </q-select>
 
-            <!-- <q-select
-                style="min-width:12em"
-                label="Device"
-                option-label="comName"
-                v-model="testXX"
-                :options="deviceList"
-            />
-
-            <p>{{ testXX }}</p>
-
-            <q-btn
-                flat
-                round
-                dense
-                hint="search devices"
-                icon="refresh"
-                :disable="deviceIsOpen"
-                :loading="deviceSearching"
-                @click="search()"
-            >
-                <template v-slot:loading>
-                    <q-spinner-radio />
-                </template>
-            </q-btn>
-            -->
-
             <q-btn
                 rounded
                 :icon="deviceIsOpen ? 'phonelink_off' : 'phonelink'"
@@ -119,10 +86,10 @@
                     />
                 </template>
             </q-btn>
+        </section>
+        <section>
             <p class="q-ma-md">
                 {{ deviceSelected }}
-                <!-- {{ deviceSelected.comName }}
-                {{ deviceSelected.pnpId }} -->
             </p>
         </section>
 
@@ -168,7 +135,23 @@
 </template>
 
 <script>
+import { extend } from 'quasar'
 import LogView from 'components/LogView.vue'
+
+const dummyResponder = {
+    vendorId: -1,
+    productId: -1,
+    comName: '/dummyResponder/0',
+    pnpId: -1,
+    locationId: -1,
+    serialNumber: '42',
+    manufacturer: 's-light.eu',
+    product: 'dummyResponder',
+    release: undefined,
+    interface: undefined,
+    usagePage: undefined,
+    usage: undefined
+}
 
 export default {
     name: 'PageSerialTest',
@@ -177,15 +160,7 @@ export default {
             serialAvailable: false,
             device: undefined,
             parser: undefined,
-            deviceList: [{
-                comName: 'dummyResponder',
-                manufacturer: 's-light.eu',
-                serialNumber: '42',
-                pnpId: undefined,
-                locationId: undefined,
-                productId: undefined,
-                vendorId: undefined
-            }],
+            deviceList: [dummyResponder],
             // deviceSelected: {
             //     comName: '',
             //     pnpId: undefined
@@ -217,11 +192,11 @@ export default {
         },
         deviceOpen () {
             console.group('deviceOpen()')
-            // console.log(`this.deviceSelected.comName '${this.deviceSelected.comName}'`)
             console.log(`this.deviceSelected '${this.deviceSelected}'`)
-            // if (this.deviceSelected.comName.startsWith('dummyResponder')) {
-            if (this.deviceSelected.startsWith('dummyResponder')) {
+            if (this.deviceSelected.comName.startsWith('/dummyResponder/')) {
+                console.log(`this.deviceSelected.comName '${this.deviceSelected.comName}'`)
                 setTimeout(() => {
+                    console.log('done.')
                     // we're done, we reset loading state
                     this.deviceConnecting = false
                     this.deviceIsOpen = true
@@ -230,8 +205,7 @@ export default {
                 if (this.serialAvailable) {
                     try {
                         this.device = new SerialPort(
-                            this.deviceSelected, { baudRate: 115200 })
-                        // this.deviceSelected.comName, { baudRate: 115200 })
+                            this.deviceSelected.comName, { baudRate: 115200 })
                         this.device.pipe(this.parser)
                         this.device.on('open', () => {
                             // console.log('event open - port.isOpen:', this.device.isOpen)
@@ -249,13 +223,15 @@ export default {
                         console.error('port open failed:\n', e)
                         this.deviceConnecting = false
                     }
+                } else {
+                    this.deviceConnecting = false
+                    console.error('Serial not Available!')
                 }
             }
             console.groupEnd()
         },
         deviceClose () {
-            // if (this.deviceSelected.comName.startsWith('dummyResponder')) {
-            if (this.deviceSelected.startsWith('dummyResponder')) {
+            if (this.deviceSelected.comName.startsWith('/dummyResponder/')) {
                 setTimeout(() => {
                     // we're done, we reset loading state
                     this.deviceConnecting = false
@@ -272,8 +248,7 @@ export default {
         },
         messageSend () {
             // console.log('send message:', this.messagaeToSend)
-            // if (this.deviceSelected.comName.startsWith('dummyResponder')) {
-            if (this.deviceSelected.startsWith('dummyResponder')) {
+            if (this.deviceSelected.comName.startsWith('/dummyResponder/')) {
                 const recMessage = this.messagaeToSend
                 setTimeout(() => {
                     this.messageReceive(recMessage)
@@ -285,9 +260,6 @@ export default {
             }
             this.$refs.mylog.addEntryOut(this.messagaeToSend)
             this.messagaeToSend = ''
-            // if (this.deviceSelected.startsWith('dummyResponder')) {
-            //     this.messagaeToSend = 'Hello World Dummy messagae 2...'
-            // }
         },
         messageReceive (value) {
             this.$refs.mylog.addEntryIn(value)
@@ -299,15 +271,9 @@ export default {
                     devices => {
                         // devices.forEach(console.log)
                         // reset list
-                        this.deviceList = [{
-                            comName: 'dummyResponder',
-                            manufacturer: 's-light.eu',
-                            serialNumber: '42',
-                            pnpId: undefined,
-                            locationId: undefined,
-                            productId: undefined,
-                            vendorId: undefined
-                        }]
+                        const dummyResponderNew = {}
+                        extend(dummyResponderNew, dummyResponder)
+                        this.deviceList = [dummyResponderNew]
                         // this.deviceList.push(...devices)
                         for (let device of devices) {
                             if (device.vendorId) {
@@ -315,8 +281,7 @@ export default {
                                 this.deviceList.push(device)
                             }
                         }
-                        // this.deviceSelected = this.deviceList[this.deviceList.length - 1]
-                        this.deviceSelected = this.deviceNamesList[this.deviceNamesList.length - 1]
+                        this.deviceSelected = this.deviceList[this.deviceList.length - 1]
                         this.deviceSearching = false
                     },
                     err => {
@@ -328,22 +293,21 @@ export default {
                 // simulate a delay
                 setTimeout(() => {
                     // we're done, we reset loading state
-                    this.deviceList.push({
-                        comName: 'dummyResponder' + this.deviceList.length,
-                        manufacturer: 's-light.eu',
-                        serialNumber: 42 + (this.deviceList.length * 100),
-                        pnpId: undefined,
-                        locationId: undefined,
-                        productId: undefined,
-                        vendorId: undefined
-                    })
+                    const dummyResponderNew = {}
+                    // https://quasar.dev/quasar-utils/other-utils#(Deep)-Copy-Objects
+                    extend(dummyResponderNew, dummyResponder)
+                    dummyResponderNew.comName = '/dummyResponder/' + this.deviceList.length
+                    dummyResponderNew.serialNumber = 42 + (this.deviceList.length * 100)
+                    dummyResponderNew.product = 'dummyResponder new' + this.deviceList.length
+
+                    this.deviceList.push(dummyResponderNew)
                     this.deviceSearching = false
                 }, 2000)
             }
         }
     },
     computed: {
-        deviceNamesList: function () {
+        testthings: function () {
             let result = []
             for (let port of this.deviceList) {
                 result.push(port.comName)
@@ -353,8 +317,7 @@ export default {
     },
     mounted: function () {
         // console.group('mounted..')
-        // this.deviceSelected = this.deviceList[0]
-        this.deviceSelected = this.deviceNamesList[0]
+        this.deviceSelected = this.deviceList[0]
         if (SerialPort) {
             // console.group('setup SerialPort usage')
             try {

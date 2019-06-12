@@ -314,7 +314,7 @@ export default {
         }
     },
     computed: {
-        // deviceNamesList: function () {
+        // thing: function () {
         //     let result = []
         //     for (let port of this.deviceList) {
         //         result.push(port.path)
@@ -324,7 +324,6 @@ export default {
     },
     mounted: function () {
         console.group('mounted..')
-        // this.deviceSelected = this.deviceNamesList[0]
         // this.deviceSelected = this.deviceList[0]
         if (HID) {
             // for debug purposes:
