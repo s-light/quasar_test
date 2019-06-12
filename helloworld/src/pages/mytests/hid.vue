@@ -19,6 +19,11 @@
                 </li>
             </ul> -->
         </section>
+        <LogView
+            class="q-mt-md q-pa-sm"
+            :log="log"
+            ref="mylog"
+        />
     </q-page>
 </template>
 
@@ -26,11 +31,14 @@
 </style>
 
 <script>
+import LogView from 'components/LogView.vue'
+
 export default {
     name: 'PageHidTest',
     data () {
         return {
             hid_device_list: []
+            // log: undefined
         }
     },
     methods: {
@@ -55,13 +63,9 @@ export default {
         // console.groupEnd()
     },
     filters: {
+    },
+    components: {
+        LogView
     }
 }
-
-// https://quasar.dev/quasar-plugins/web-storage
-// this.$q.localStorage.set(key, value)
-// let value = this.$q.localStorage.getItem(key)
-//
-// this.$q.sessionStorage.set(key, value)
-// let value = this.$q.sessionStorage.getItem(key)
 </script>

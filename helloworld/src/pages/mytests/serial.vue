@@ -126,18 +126,16 @@
             </p>
         </section>
 
-        <section class="log q-mt-md q-pa-sm">
-            <div
-                class="line row"
-                v-for="(line, index) in log"
-                :key="index"
-            >
-                <div class="info q-px-sm">
-                    {{ line.time | timeOnly }} {{ line.direction }}
-                </div>
-                <pre class="col-grow">{{ line.text }}</pre>
-            </div>
-        </section>
+        <LogView
+            class="q-mt-md q-pa-sm"
+            ref="mylog"
+        />
+        <!--
+        <LogView
+            class="q-mt-md q-pa-sm"
+            ref="mylog"
+            v-bind:log.sync="log"
+        /> -->
         <section
             class="q-mt-md"
             style="min-width: 50vw"
@@ -174,41 +172,7 @@
 </template>
 
 <script>
-import { date } from 'quasar'
-
-const demoData = [
-    {
-        direction: '~',
-        time: '2019-06-02T11:42:42.000Z',
-        text: 'First Line'
-    },
-    {
-        direction: '~',
-        time: '2019-06-02T11:42:42.102Z',
-        text: 'multiline\n content'
-    },
-    {
-        direction: '~',
-        time: '2019-06-02T11:42:42.200Z',
-        text: ''
-    },
-    {
-        direction: '~',
-        time: '2019-06-02T11:42:42.420Z',
-        text: `this 'line' contains a full unicode styled table:
-╔════════════════╦═══════╦══════╗
-║      Name      ║ Value ║ Unit ║
-╠════════════════╬═══════╬══════╣
-║ Ambient Light  ║    42 ║ LUX  ║
-║ LED-Brightness ║    50 ║ %    ║
-╚════════════════╩═══════╩══════╝`
-    },
-    {
-        direction: '~',
-        time: '2019-06-02T11:43:00.000Z',
-        text: 'the end..'
-    }
-]
+import LogView from 'components/LogView.vue'
 
 export default {
     name: 'PageSerialTest',
@@ -235,9 +199,8 @@ export default {
             // testXX: 'XXX',
             deviceSearching: false,
             deviceConnecting: false,
-            messagaeToSend: 'Hello World :-)',
-            log: demoData,
-            logCountMax: 500
+            messagaeToSend: 'Hello World :-)'
+            // log: undefined
         }
     },
     methods: {
@@ -321,28 +284,14 @@ export default {
                     this.port.write(this.messagaeToSend + '\n')
                 }
             }
-            const logEntry = {
-                // https://stackoverflow.com/questions/33253275/what-unicode-symbol-represents-a-person
-                // direction: '👤',
-                direction: '→',
-                time: new Date(),
-                text: this.messagaeToSend
-            }
-            this.log.push(logEntry)
+            this.$refs.mylog.addEntryOut(this.messagaeToSend)
             this.messagaeToSend = ''
+            // if (this.deviceSelected.startsWith('dummyResponder')) {
+            //     this.messagaeToSend = 'Hello World Dummy messagae 2...'
+            // }
         },
         messageReceive (value) {
-            // console.log('receive message:', value)
-            const logEntry = {
-                direction: '*',
-                time: new Date(),
-                text: value
-            }
-            this.log.push(logEntry)
-            // limit log length
-            while (this.log.length > this.logCountMax) {
-                this.log.shift()
-            }
+            this.$refs.mylog.addEntryIn(value)
         },
         search () {
             if (this.serialAvailable) {
@@ -435,17 +384,9 @@ export default {
         console.groupEnd()
     },
     filters: {
-        timeOnly: function (value) {
-            // console.log('value', value)
-            const timeStamp = new Date(value)
-            // console.log('timeStamp', timeStamp)
-            let result = ''
-            if (date.isValid(timeStamp)) {
-                // https://quasar.dev/quasar-utils/date-utils#Format-for-display
-                result = date.formatDate(timeStamp, 'HH:mm:ss.SSS')
-            }
-            return result
-        }
+    },
+    components: {
+        LogView
     }
 }
 
@@ -458,26 +399,4 @@ export default {
 </script>
 
 <style lang="stylus">
-    .log
-        flex-grow: 2
-        align-self: stretch
-        min-width: 50vw
-        max-width: 100vw
-        max-height: calc(100vh - 15em);
-        min-height: 5em;
-        overflow: auto
-        background-color: hsla(0, 0, 0, 0.05)
-        font-size: 1em
-        line-height: 129%
-        font-family: Overpass-mono
-    .log .info
-        background $info
-        min-width 3em
-        text-align right
-    .log pre
-        margin: 0
-        white-space: pre
-        font-size: 1em
-        line-height: 129%
-        font-family: Overpass-mono
 </style>
