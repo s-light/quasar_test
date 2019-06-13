@@ -158,13 +158,8 @@ export default {
             device: undefined,
             parser: undefined,
             deviceList: [dummyResponder],
-            // deviceSelected: {
-            //     path: '',
-            //     usagePage: undefined
-            // },
             deviceSelected: null,
             deviceIsOpen: false,
-            // testXX: 'XXX',
             deviceSearching: false,
             deviceConnecting: false,
             messagaeToSend: 'Hello World :-)',
@@ -201,25 +196,18 @@ export default {
             } else {
                 if (this.hidAvailable) {
                     try {
-                        // TODO: implement
-                        // this.device = new SerialPort(
-                        //     this.deviceSelected, { baudRate: 115200 })
-                        // // this.deviceSelected.path, { baudRate: 115200 })
-                        // this.device.pipe(this.parser)
-                        // this.device.on('open', () => {
-                        //     // console.log('event open - port.isOpen:', this.device.isOpen)
-                        //     console.log('event open')
-                        //     this.deviceIsOpen = this.device.isOpen
-                        //     this.deviceConnecting = false
-                        // })
-                        // this.device.on('close', () => {
-                        //     // console.log('event close - port.isOpen:', this.device.isOpen)
-                        //     console.log('event close')
-                        //     this.deviceIsOpen = this.device.isOpen
-                        //     this.deviceConnecting = false
-                        // })
+                        this.device = new HID.HID(this.deviceSelected.path)
+                        this.device.on('error', (err) => {
+                            this.$refs.mylog.addEntrySpecial(err)
+                        })
+                        this.device.on('data', (data) => {
+                            this.messageReceive(data)
+                        })
+                        this.deviceIsOpen = true
+                        this.deviceConnecting = false
                     } catch (e) {
-                        console.error('port open failed:\n', e)
+                        console.error('device open failed:\n', e)
+                        this.deviceIsOpen = false
                         this.deviceConnecting = false
                     }
                 }
@@ -238,28 +226,40 @@ export default {
                 // console.log('this.device', this.device)
                 if (this.hidAvailable && this.device) {
                     this.deviceConnecting = true
-                    // this.device.close()
-                    // TODO: implement
-                    // console.log('this.device', this.device)
+                    this.device.close()
+                    this.deviceIsOpen = false
+                    this.deviceConnecting = false
                 }
             }
         },
         messageSend () {
-            // console.log('send message:', this.messagaeToSend)
-            // if (this.deviceSelected.startsWith('dummyResponder')) {
+            console.group('messageSend')
+            console.log('messagaeToSend:', this.messagaeToSend)
             if (this.deviceSelected.path.startsWith('/dummyResponder/')) {
+                console.log('send to dummyResponder')
                 const recMessage = this.messagaeToSend
                 setTimeout(() => {
                     this.messageReceive(recMessage)
                 }, 1000)
             } else {
                 if (this.hidAvailable) {
-                    // this.device.write(this.messagaeToSend + '\n')
-                    // TODO: implement
+                    console.log('hid is available.')
+                    try {
+                        console.log('write to device')
+                        // this.device.write([0x05, 42, 0xff])
+                        const messgeAsCharCodeArray = (
+                            Array.from(this.messagaeToSend)
+                                .map((val) => val.charCodeAt(0))
+                        )
+                        this.device.write(messgeAsCharCodeArray)
+                    } catch (e) {
+                        console.error('write failed:\n', e)
+                    }
                 }
             }
             this.$refs.mylog.addEntryOut(this.messagaeToSend)
             this.messagaeToSend = ''
+            console.groupEnd()
         },
         messageReceive (value) {
             this.$refs.mylog.addEntryIn(value)
@@ -268,40 +268,46 @@ export default {
             console.group('search for devices..')
             this.deviceSearching = true
             if (this.hidAvailable) {
-                // TODO: implement
-                // SerialPort.list().then(
+                // TODO: check/find async version..
+                // HID.devices().then(
                 //     devices => {
-                //         // devices.forEach(console.log)
-                //         // reset list
-                //         this.deviceList = [{
-                //             product: 'dummyResponder',
-                //             path: '/dummyResponder/1',
-                //             manufacturer: 's-light.eu',
-                //             serialNumber: '42',
-                //         }]
-                //         // this.deviceList.push(...devices)
-                //         for (let device of devices) {
-                //             if (device.vendorId) {
-                //                 // console.log(device)
-                //                 this.deviceList.push(device)
-                //             }
-                //         }
-                //         this.deviceSelected = this.deviceList[this.deviceList.length - 1]
-                //         // this.deviceSelected = this.deviceNamesList[this.deviceNamesList.length - 1]
-                //         this.deviceSearching = false
+                //         // use code from the 'if part'
                 //     },
                 //     err => {
-                //         console.error('serialport.list:', err)
+                //         console.error('HID.devices:', err)
                 //         this.deviceSearching = false
                 //     }
                 // )
+                const devices = HID.devices()
+                if (devices) {
+                    // reset list
+                    const dummyResponderNew = {}
+                    extend(dummyResponderNew, dummyResponder)
+                    this.deviceList = [dummyResponderNew]
+                    // use new list
+                    for (let device of devices) {
+                        console.log(`device ${device}`)
+                        // filter results..
+                        // if (device.vendorId) {
+                        //     // console.log(device)
+                        //     this.deviceList.push(device)
+                        // }
+                    }
+                    this.deviceList.push(...devices)
+                    // cleanup
+                    this.deviceSelected = this.deviceList[this.deviceList.length - 1]
+                    this.deviceSearching = false
+                } else {
+                    console.error('HID.devices:', 'failed.')
+                    this.deviceSearching = false
+                }
             } else {
                 // simulate a delay
                 setTimeout(() => {
                     // we're done, we reset loading state
                     const dummyResponderNew = {}
                     // https://quasar.dev/quasar-utils/other-utils#(Deep)-Copy-Objects
-                    extend(true, dummyResponderNew, dummyResponder)
+                    extend(dummyResponderNew, dummyResponder)
                     dummyResponderNew.path = '/dummyResponder/' + this.deviceList.length
                     dummyResponderNew.serialNumber = 42 + (this.deviceList.length * 100)
                     dummyResponderNew.product = 'dummyResponder new' + this.deviceList.length
@@ -326,26 +332,20 @@ export default {
         console.group('mounted..')
         // this.deviceSelected = this.deviceList[0]
         if (HID) {
-            // for debug purposes:
-            console.info('list of HID devices:')
-            for (let device of HID.devices()) {
-                console.log(device)
-            }
+            // console.info('list of HID devices:')
+            // for (let device of HID.devices()) {
+            //     console.log(device)
+            // }
 
-            console.group('setup HID usage')
-            console.log('TODO!!!!!')
+            // console.group('setup HID usage')
             try {
-                // TODO: implement
-                // const Readline = SerialPort.parsers.Readline
-                // this.parser = new Readline()
-                // this.parser.on('data', line => this.messageReceive(line))
-                // this.hidAvailable = true
+                HID.devices()
+                this.hidAvailable = true
             } catch (e) {
                 this.hidAvailable = false
                 console.error(e)
             }
-            console.groupEnd()
-            // console.log('search for devices..')
+            // console.groupEnd()
             this.search()
         }
         if (!this.hidAvailable) {
