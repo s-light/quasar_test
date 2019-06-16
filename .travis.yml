@@ -10,3 +10,12 @@ dist: xenial
 
 # install:
 #     - npm install -g @quasar/cli
+
+# before_deploy:
+#     # we need to create a zip first..
+# deploy:
+#   provider: releases
+#   api_key: GH_TOKEN
+#   # file: "FILE TO UPLOAD"
+#   skip_cleanup: true
+#   draft: true
