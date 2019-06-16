@@ -6,7 +6,7 @@
 some simple tests with the Quasar Framework.
 
 for the SPA (single Page Application) Web-Version you can go to:
-[https://s-light.github.io/quasar_test/helloworld/dist/spa/#/](https://s-light.github.io/quasar_test/helloworld/dist/spa/)
+[https://s-light.github.io/quasar_test/dist/spa/#/](https://s-light.github.io/quasar_test/dist/spa/)
 
 ## getting started
 if you are new to quasar and so i recommend [this tutorial](https://github.com/hawkeye64/electron-quasar-file-explorer)
