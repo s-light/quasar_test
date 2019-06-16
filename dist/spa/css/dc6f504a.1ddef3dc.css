@@ -1,15 +1,16 @@
 .log {
   flex-grow: 2;
+  align-self: stretch;
   min-width: 50vw;
   max-width: 100vw;
+  max-height: calc(100vh - 15em);
+  min-height: 5em;
   overflow: auto;
   background-color: rgba(0,0,0,0.05);
-/* white-space: pre */
   font-size: 1em;
   line-height: 129%;
   font-family: Overpass-mono;
 }
-/* .line */
 .log .info {
   background: #a6c5ff;
   min-width: 3em;
@@ -22,6 +23,6 @@
   line-height: 129%;
   font-family: Overpass-mono;
 }
-/*# sourceMappingURL=src/pages/mytests/serial.css.map */
+/*# sourceMappingURL=src/components/LogView.css.map */
 
-/*# sourceMappingURL=05fa12b0.d492617f.css.map*/
+/*# sourceMappingURL=dc6f504a.1ddef3dc.css.map*/

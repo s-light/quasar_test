@@ -1,7 +1,10 @@
+language: node_js
+
+# https://docs.travis-ci.com/user/multi-os/
 os:
   - linux
   - osx
 dist: xenial
-language: node_js
+
 # install:
 #     - npm install -g @quasar/cli
