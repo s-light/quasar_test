@@ -14,10 +14,10 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
+    "quasar": "^1.0.0-rc.4",
     "@quasar/extras": "^1.0.0",
     "electron-rebuild": "^1.8.5",
     "node-hid": "^0.7.9",
-    "quasar": "^1.0.0-beta.0",
     "serialport": "^7.1.5"
   },
   "devDependencies": {
