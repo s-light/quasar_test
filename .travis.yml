@@ -22,13 +22,24 @@ addons:
   # homebrew:
   #   packages: packagename
 
-before_deploy:
+
+# this is all we need to trigger the upload...
+# $GH_TOKEN has to be available.
+after_success:
     - yarn release
-deploy:
-    skip_cleanup: true
-    # provider: releases
-    # api_key: GH_TOKEN
-    # file: "FILE TO UPLOAD"
-    # draft: true
-    # on:
-    #     tags: true
+    - yarn release_upload
+    - echo "this should have updated the assertst in a release draft :-)"
+
+
+# deploy:
+#     skip_cleanup: true
+#     provider: releases
+#     api_key: $GH_TOKEN
+#     # file: "FILE TO UPLOAD"
+#     draft: true
+#     on:
+#         tags: true
+# deploy:
+#     skip_cleanup: true
+#     provider: script
+#     script: yarn release
