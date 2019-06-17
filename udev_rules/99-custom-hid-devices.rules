@@ -1,0 +1,26 @@
+#
+# Debian/Ubuntu:
+# Drop this file into /etc/udev/rules.d
+# `sudo cp ./99-custom-hid-devices.rules /etc/udev/rules.d/`
+# then reload the rules with ``
+# and unplug and re-plug your device.
+# This should make the device accessible to non root-applications.
+#
+# MODE="0666" is not recommended for multi-user systems..
+# the rules follow the guide at
+# https://www.npmjs.com/package/node-hid#udev-device-permissions
+
+SUBSYSTEM=="input", GROUP="input", MODE="0666"
+
+# Sertronics LED-Name-Tag
+#
+# idVendor=0416, idProduct=5020
+# Mfr=1, Product=2, SerialNumber=0
+# LSicroelectronics LS32 Custm HID
+SUBSYSTEM=="usb", ATTRS{idVendor}=="0416", ATTRS{idProduct}=="5020", MODE:="666", GROUP="plugdev"
+KERNEL=="hidraw*", ATTRS{idVendor}=="0416", ATTRS{idProduct}=="5020", MODE="0666", GROUP="plugdev"
+
+# Arduino Leonardo
+# Olimexino-32U4
+SUBSYSTEM=="usb", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="8036", MODE:="666", GROUP="plugdev"
+KERNEL=="hidraw*", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="8036", MODE="0666", GROUP="plugdev"
