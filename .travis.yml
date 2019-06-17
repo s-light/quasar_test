@@ -15,8 +15,10 @@ addons:
     packages:
         # needed for node-hid
         # https://www.npmjs.com/package/node-hid#compiling-from-source
+        # https://github.com/node-hid/node-hid/pull/253
         - libusb-1.0-0
         - libusb-1.0-0-dev
+        - libudev-dev
   # homebrew:
   #   packages: packagename
 
