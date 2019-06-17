@@ -3,6 +3,8 @@
 
 # Quasar Test
 
+[![Build Status](https://www.travis-ci.org/s-light/quasar_test.svg?branch=master)](https://www.travis-ci.org/s-light/quasar_test)
+
 some simple tests with the Quasar Framework.
 
 for the SPA (single Page Application) Web-Version you can go to:

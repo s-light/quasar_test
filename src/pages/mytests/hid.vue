@@ -358,13 +358,7 @@ export default {
     },
     beforeDestroy: function () {
         console.group('beforeDestroy..')
-        if (this.hidAvailable) {
-            if (this.device && this.device.isOpen) {
-                console.group('close devices.')
-                this.device.close()
-                // TODO: implement
-            }
-        }
+        this.deviceClose()
         console.groupEnd()
     },
     filters: {

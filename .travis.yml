@@ -1,21 +1,21 @@
 language: node_js
 node_js:
-  - "12"
+    - "12"
 
 # https://docs.travis-ci.com/user/multi-os/
 os:
-  - linux
-  - osx
+    - linux
+    - osx
 dist: xenial
 
-# install:
-#     - npm install -g @quasar/cli
-
-# before_deploy:
-#     # we need to create a zip first..
-# deploy:
-#   provider: releases
-#   api_key: GH_TOKEN
-#   # file: "FILE TO UPLOAD"
-#   skip_cleanup: true
-#   draft: true
+before_deploy:
+    # we need to create a zip first..
+    # - yarn create_zips
+deploy:
+    provider: releases
+    api_key: GH_TOKEN
+    # file: "FILE TO sUPLOAD"
+    skip_cleanup: true
+    draft: true
+    on:
+        tags: true
