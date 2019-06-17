@@ -8,8 +8,19 @@ os:
     - osx
 dist: xenial
 
+cache: yarn
+
+addons:
+  apt:
+    packages:
+        # needed for node-hid
+        # https://www.npmjs.com/package/node-hid#compiling-from-source
+        - libusb-1.0-0
+        - libusb-1.0-0-dev
+  # homebrew:
+  #   packages: packagename
+
 before_deploy:
-    # we need to create a zip first..
     - yarn release
 deploy:
     provider: releases
