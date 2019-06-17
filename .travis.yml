@@ -25,10 +25,10 @@ addons:
 before_deploy:
     - yarn release
 deploy:
-    provider: releases
-    api_key: GH_TOKEN
-    # file: "FILE TO UPLOAD"
     skip_cleanup: true
-    draft: true
+    # provider: releases
+    # api_key: GH_TOKEN
+    # file: "FILE TO UPLOAD"
+    # draft: true
     # on:
     #     tags: true
