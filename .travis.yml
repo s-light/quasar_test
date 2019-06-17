@@ -1,14 +1,22 @@
 language: node_js
 node_js:
     - "12"
+cache: yarn
 
 # https://docs.travis-ci.com/user/multi-os/
 os:
     - linux
     - osx
+    # - windows
+    # be carefull - secrets are shown!!!
+    # https://travis-ci.community/t/current-known-issues-please-read-this-before-posting-a-new-topic/264/22
+
 dist: xenial
 
-cache: yarn
+# jobs:
+#     allow_failures:
+#         - os: windows
+
 
 addons:
   apt:
@@ -24,7 +32,7 @@ addons:
 
 
 # this is all we need to trigger the upload...
-# $GH_TOKEN has to be available.
+# $GH_TOKEN has to be set...
 after_success:
     - yarn release
     - yarn release_upload
