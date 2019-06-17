@@ -171,6 +171,8 @@ module.exports = function (ctx) {
             builder: {
                 // https://www.electron.build/configuration/configuration
                 // for now we use the defaults and will see what's happening..
+                // 'publish': ['github'],
+                // ^ should be automatically be the default if GH_TOKEN is set.
 
                 // 'appId': 'eu.s-light.app.quasar.helloworld',
                 // 'copyright': 'Copyright © 2019 Stefan Krüger',

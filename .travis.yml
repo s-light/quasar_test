@@ -10,12 +10,12 @@ dist: xenial
 
 before_deploy:
     # we need to create a zip first..
-    # - yarn create_zips
+    - yarn release
 deploy:
     provider: releases
     api_key: GH_TOKEN
-    # file: "FILE TO sUPLOAD"
+    # file: "FILE TO UPLOAD"
     skip_cleanup: true
     draft: true
-    on:
-        tags: true
+    # on:
+    #     tags: true

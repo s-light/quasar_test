@@ -1,6 +1,6 @@
 {
     "name": "helloworld",
-    "version": "0.0.1",
+    "version": "0.2.0",
     "description": "Quasar HelloWorld Test :-)",
     "productName": "Quasar HelloWorld",
     "cordovaId": "eu.s-light.app.quasar.helloworld",
@@ -8,6 +8,7 @@
     "license": "GPL-3.0-or-later OR AGPL-3.0-or-later",
     "private": true,
     "scripts": {
+        "release": "quasar build --mode electron",
         "postinstall": "electron-builder install-app-deps",
         "dist": "electron-builder",
         "install_rebuild": "electron-rebuild",

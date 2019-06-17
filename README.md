@@ -34,24 +34,24 @@ how to use & install this repository
         $ quasar -v
         1.0.0-beta.7
         ```
-- change to quasar-app folder
+- change to this project folder
     ```bash
-    $ cd helloworld/
-    /helloworld$
+    $ cd quasar_test/
+    /quasar_test$
     ```
 - install requirements
     ```bash
-    /helloworld$ yarn
+    /quasar_test$ yarn
     # ....
     ```
 - then start the SPA app in dev mode
     ```bash
-    /helloworld$ quasar dev
+    /quasar_test$ quasar dev
     # ....
     # browser opens and you can use the app ;-)
     ```
 - or as electron app
     ```bash
-    /helloworld$ quasar dev --mode electron
+    /quasar_test$ quasar dev --mode electron
     # ....
     ```
