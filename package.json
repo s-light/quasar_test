@@ -9,9 +9,9 @@
     "private": true,
     "scripts": {
         "release": "quasar build --mode electron",
-        "postinstall": "electron-builder install-app-deps",
+        "postinstall_backup": "electron-builder install-app-deps",
+        "postinstall": "if [ $TRAVIS_OS_NAME ]; then electron-builder install-app-deps; else echo \"nothing to do.\"; fi",
         "dist": "electron-builder",
-        "install_rebuild": "electron-rebuild",
         "lint": "eslint --ext .js,.vue src",
         "lint-fix": "eslint --ext .js,.vue src --fix",
         "create_zips": "echo \"TODO!\" && exit 0",
