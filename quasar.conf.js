@@ -175,16 +175,18 @@ module.exports = function (ctx) {
                 // 'appId': 'eu.s-light.app.quasar.helloworld',
                 // 'copyright': 'Copyright © 2019 Stefan Krüger',
                 // 'productName': 'Quasar HelloWorld',
-                // 'linux': {
-                //     'category': 'Office'
-                //     // 'target': [
-                //     //     {
-                //     //         'target': 'AppImage',
-                //     //         'arch': [
-                //     //             'x64'
-                //     //         ]
-                //     //     }
-                //     // ]
+                'linux': {
+                    'category': 'Utility'
+                    // 'category': 'Office'
+                    // 'target': [
+                    //     {
+                    //         'target': 'AppImage',
+                    //         'arch': [
+                    //             'x64'
+                    //         ]
+                    //     }
+                    // ]
+                }
                 // },
                 // 'win': {
                 //     'legalTrademarks': 'Copyright © 2019 Stefan Krüger',

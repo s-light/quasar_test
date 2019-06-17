@@ -13,7 +13,7 @@
 SUBSYSTEM=="input", GROUP="input", MODE="0666"
 
 # Sertronics LED-Name-Tag
-#
+# https://www.berrybase.de/en/computer/pc-peripherals/usb-gadgets/3918/led-name-tag-11x44-pixel-usb
 # idVendor=0416, idProduct=5020
 # Mfr=1, Product=2, SerialNumber=0
 # LSicroelectronics LS32 Custm HID
