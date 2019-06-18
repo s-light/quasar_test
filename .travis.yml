@@ -31,20 +31,12 @@ addons:
     # choco:
     #     packages: python2
 
-# env:
-#     MYINFO: "******************************************"
-
+before_script:
+    - if [ $TRAVIS_OS_NAME = windows ]; then epxort YARN_GPG=no; fi
 before_install:
     - if [ $TRAVIS_OS_NAME = windows ]; then python2 --version; fi
-    # - if [ $TRAVIS_OS_NAME = windows ]; then echo $MYINFO; fi
-    # - if [ $TRAVIS_OS_NAME = windows ]; then echo "installing windows build tools:"; fi
-    # # - if [ $TRAVIS_OS_NAME = windows ]; then npm install --global windows-build-tools; fi
-    # - if [ $TRAVIS_OS_NAME = windows ]; then npm install --global --production --verbose windows-build-tools; fi
-    # - if [ $TRAVIS_OS_NAME = windows ]; then echo $MYINFO; fi
-    # # - if [ $TRAVIS_OS_NAME = windows ]; then $env:Path += ";$env:USERPROFILE\.windows-build-tools\python27"; fi
-    # - if [ $TRAVIS_OS_NAME = windows ]; then export PATH="$PATH:USERPROFILE\.windows-build-tools\python27"; fi
-    # - if [ $TRAVIS_OS_NAME = windows ]; then echo $PATH; fi
-    # - if [ $TRAVIS_OS_NAME = windows ]; then echo $MYINFO; fi
+    # - if [ $TRAVIS_OS_NAME = windows ]; then npm install --global windows-build-tools; fi
+    # ^ this does not work.. endless loop...
 
 # build without upload
 # after_success:
@@ -68,3 +60,6 @@ after_success:
 #     skip_cleanup: true
 #     provider: script
 #     script: yarn release
+
+after_deploy:
+    - ps -ef
