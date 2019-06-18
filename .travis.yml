@@ -7,28 +7,36 @@ cache: yarn
 os:
     - linux
     - osx
-    # - windows
-    # be carefull - secrets are shown!!!
+    - windows
+    # be carefull - secrets are not protected..!!!
     # https://travis-ci.community/t/current-known-issues-please-read-this-before-posting-a-new-topic/264/22
 
 dist: xenial
 
-# jobs:
-#     allow_failures:
-#         - os: windows
-
+jobs:
+    allow_failures:
+        - os: windows
 
 addons:
-  apt:
-    packages:
-        # needed for node-hid
-        # https://www.npmjs.com/package/node-hid#compiling-from-source
-        # https://github.com/node-hid/node-hid/pull/253
-        - libusb-1.0-0
-        - libusb-1.0-0-dev
-        - libudev-dev
-  # homebrew:
-  #   packages: packagename
+    apt:
+        packages:
+            # needed for node-hid
+            # https://www.npmjs.com/package/node-hid#compiling-from-source
+            # https://github.com/node-hid/node-hid/pull/253
+            - libusb-1.0-0
+            - libusb-1.0-0-dev
+            - libudev-dev
+    # homebrew:
+    #     packages: packagename
+    # choco:
+    #     packages: python2
+
+before_install:
+    # - if [ $TRAVIS_OS_NAME = windows ]; then choco install python2; fi
+    - if [ $TRAVIS_OS_NAME = windows ]; then npm install --global windows-build-tools; fi
+    # - if [ $TRAVIS_OS_NAME = windows ]; then $env:Path += ";$env:USERPROFILE\.windows-build-tools\python27"; fi
+    - if [ $TRAVIS_OS_NAME = windows ]; then export PATH="$PATH:USERPROFILE\.windows-build-tools\python27"; fi
+    - if [ $TRAVIS_OS_NAME = windows ]; then echo $PATH; fi
 
 # build without upload
 # after_success:
