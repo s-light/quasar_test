@@ -8,20 +8,18 @@ os:
     - linux
     - osx
     - windows
+      env: YARN_GPG=no
     # be carefull - secrets are not protected..!!!
     # https://travis-ci.community/t/current-known-issues-please-read-this-before-posting-a-new-topic/264/22
 
-# dist: xenial
+dist: xenial
 
-matrix:
-    include:
-        - os: linux
-          dist: xenial
-        - os: osx
-        - os: windows
-          env: YARN_GPG=no
-          # this fixes the windows builds..
-          # https://travis-ci.community/t/build-doesnt-finish-after-completing-tests/
+# matrix:
+#     include:
+#         - os: windows
+#           env: YARN_GPG=no
+#           # this fixes the windows builds..
+#           # https://travis-ci.community/t/build-doesnt-finish-after-completing-tests/
 #
 
 # jobs:
