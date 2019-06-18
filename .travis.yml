@@ -31,12 +31,19 @@ addons:
     # choco:
     #     packages: python2
 
+env:
+    MYINFO: "******************************************"
+
 before_install:
-    # - if [ $TRAVIS_OS_NAME = windows ]; then choco install python2; fi
-    - if [ $TRAVIS_OS_NAME = windows ]; then npm install --global windows-build-tools; fi
+    - if [ $TRAVIS_OS_NAME = windows ]; then echo $MYINFO; fi
+    - if [ $TRAVIS_OS_NAME = windows ]; then echo "installing windows build tools:"; fi
+    # - if [ $TRAVIS_OS_NAME = windows ]; then npm install --global windows-build-tools; fi
+    - if [ $TRAVIS_OS_NAME = windows ]; then npm install --global --production --verbose windows-build-tools; fi
+    - if [ $TRAVIS_OS_NAME = windows ]; then echo $MYINFO; fi
     # - if [ $TRAVIS_OS_NAME = windows ]; then $env:Path += ";$env:USERPROFILE\.windows-build-tools\python27"; fi
     - if [ $TRAVIS_OS_NAME = windows ]; then export PATH="$PATH:USERPROFILE\.windows-build-tools\python27"; fi
     - if [ $TRAVIS_OS_NAME = windows ]; then echo $PATH; fi
+    - if [ $TRAVIS_OS_NAME = windows ]; then echo $MYINFO; fi
 
 # build without upload
 # after_success:
@@ -47,8 +54,6 @@ before_install:
 # $GH_TOKEN has to be available...
 after_success:
     - yarn release
-    - echo "this should have updated the asserts in a release draft :-)"
-
 
 # deploy:
 #     skip_cleanup: true
