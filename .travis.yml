@@ -31,11 +31,18 @@ addons:
     # choco:
     #     packages: python2
 
+env:
+    - YARN_GPG=no
+    - if [ $TRAVIS_OS_NAME = windows ]; then export YARN_GPG_TEST=no; fi
+
 before_install:
-    - if [ $TRAVIS_OS_NAME = windows ]; then export YARN_GPG=no; fi
-    - if [ $TRAVIS_OS_NAME = windows ]; then python2 --version; fi
+    # - if [ $TRAVIS_OS_NAME = windows ]; then export YARN_GPG=no; fi
+    # ^ this is to late in the lifecylce.. YARN already run..
+    - if [ $TRAVIS_OS_NAME = windows ]; then python --version; fi
     # - if [ $TRAVIS_OS_NAME = windows ]; then npm install --global windows-build-tools; fi
     # ^ this does not work.. endless loop...
+    - echo $YARN_GPG
+    - echo $YARN_GPG_TEST
 
 # build without upload
 # after_success:
@@ -60,5 +67,8 @@ after_success:
 #     provider: script
 #     script: yarn release
 
-after_deploy:
+after_script:
     - ps -ef
+    - tasklist
+    - powershell get-process
+    - wmic process
