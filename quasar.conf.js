@@ -150,22 +150,10 @@ module.exports = function (ctx) {
             extendWebpack (cfg) {
                 // do something with Electron main process Webpack cfg
                 // chainWebpack also available besides this extendWebpack
-                // cfg.externals = {
-                //     serialport: 'serialport'
-                // }
             },
 
             packager: {
                 // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
-
-                // OS X / Mac App Store
-                // appBundleId: '',
-                // appCategoryType: '',
-                // osxSign: '',
-                // protocol: 'myapp://path',
-
-                // Window only
-                // win32metadata: { ... }
             },
 
             builder: {
@@ -183,9 +171,6 @@ module.exports = function (ctx) {
                     // 'target': [
                     //     {
                     //         'target': 'AppImage',
-                    //         'arch': [
-                    //             'x64'
-                    //         ]
                     //     }
                     // ]
                 }
