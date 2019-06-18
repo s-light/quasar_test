@@ -1,6 +1,6 @@
 {
     "name": "helloworld",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "Quasar HelloWorld Test :-)",
     "productName": "Quasar HelloWorld",
     "cordovaId": "eu.s-light.app.quasar.helloworld",
