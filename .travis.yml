@@ -30,13 +30,16 @@ addons:
   # homebrew:
   #   packages: packagename
 
+# build without upload
+# after_success:
+    # - yarn build
 
+# build and upload
 # this is all we need to trigger the upload...
-# $GH_TOKEN has to be set...
+# $GH_TOKEN has to be available...
 after_success:
     - yarn release
-    - yarn release_upload
-    - echo "this should have updated the assertst in a release draft :-)"
+    - echo "this should have updated the asserts in a release draft :-)"
 
 
 # deploy:
