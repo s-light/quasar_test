@@ -3,25 +3,25 @@ node_js:
     - "12"
 cache: yarn
 
-# https://docs.travis-ci.com/user/multi-os/
+# # https://docs.travis-ci.com/user/multi-os/
 # os:
 #     - linux
 #     - osx
 #     - windows
 #     # be carefull - secrets are not protected..!!!
 #     # https://travis-ci.community/t/current-known-issues-please-read-this-before-posting-a-new-topic/264/22
-# 
+#
 # dist: xenial
 
 matrix:
     include:
         - os: linux
-        dist: xenial
+          dist: xenial
         - os: osx
         - os: windows
-        env: YARN_GPG=no
-        # this fixes the windows builds..
-        # https://travis-ci.community/t/build-doesnt-finish-after-completing-tests/
+          env: YARN_GPG=no
+          # this fixes the windows builds..
+          # https://travis-ci.community/t/build-doesnt-finish-after-completing-tests/
 #
 
 # jobs:
@@ -42,14 +42,12 @@ addons:
     # choco:
     #     packages: python2
 
-before_install:
-    # - if [ $TRAVIS_OS_NAME = windows ]; then export YARN_GPG=no; fi
-    # ^ this is to late in the lifecylce.. YARN already run..
-    # - if [ $TRAVIS_OS_NAME = windows ]; then python --version; fi
-    # - if [ $TRAVIS_OS_NAME = windows ]; then npm install --global windows-build-tools; fi
-    # ^ this does not work.. endless loop...
-    # - echo $YARN_GPG
-    # - echo $YARN_GPG_TEST
+# before_install:
+#     # - if [ $TRAVIS_OS_NAME = windows ]; then export YARN_GPG=no; fi
+#     # ^ this is to late in the lifecylce.. YARN already run..
+#     # - if [ $TRAVIS_OS_NAME = windows ]; then npm install --global windows-build-tools; fi
+#     # ^ this does not work.. endless loop...
+#     - echo $YARN_GPG
 
 # build without upload
 # after_success:
