@@ -31,9 +31,8 @@ addons:
     # choco:
     #     packages: python2
 
-before_script:
-    - if [ $TRAVIS_OS_NAME = windows ]; then epxort YARN_GPG=no; fi
 before_install:
+    - if [ $TRAVIS_OS_NAME = windows ]; then export YARN_GPG=no; fi
     - if [ $TRAVIS_OS_NAME = windows ]; then python2 --version; fi
     # - if [ $TRAVIS_OS_NAME = windows ]; then npm install --global windows-build-tools; fi
     # ^ this does not work.. endless loop...
