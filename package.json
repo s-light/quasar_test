@@ -8,10 +8,9 @@
     "license": "GPL-3.0-or-later OR AGPL-3.0-or-later",
     "private": true,
     "scripts": {
-        "release": "quasar build --mode electron",
-        "release_upload": "electron-builder install-app-deps",
-        "postinstall_NotActive": "if [ $CI ]; then electron-builder install-app-deps; else echo \"nothing to do.\"; fi",
-        "dist": "electron-builder",
+        "build": "quasar build --mode electron --debug",
+        "release": "quasar build --mode electron --debug",
+        "postinstall": "electron-builder install-app-deps",
         "lint": "eslint --ext .js,.vue src",
         "lint-fix": "eslint --ext .js,.vue src --fix",
         "create_zips": "echo \"TODO!\" && exit 0",
