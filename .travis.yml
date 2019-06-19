@@ -72,4 +72,4 @@ after_success:
 #     script: yarn release
 
 after_script:
-    - ps -ef
+    - if [ $TRAVIS_OS_NAME = windows ]; then ps -ef; fi

@@ -162,9 +162,9 @@ module.exports = function (ctx) {
                 // 'publish': ['github'],
                 // ^ should be automatically be the default if GH_TOKEN is set.
 
-                // 'appId': 'eu.s-light.app.quasar.helloworld',
+                'appId': 'eu.s-light.app.quasar.helloworld',
                 // 'copyright': 'Copyright © 2019 Stefan Krüger',
-                // 'productName': 'Quasar HelloWorld',
+                'productName': 'Quasar HelloWorld',
                 'mac': {
                     // https://www.electron.build/configuration/dmg
                 },
@@ -177,17 +177,19 @@ module.exports = function (ctx) {
                     ]
                 },
                 'win': {
-                    'publisherName': 'Stefan Krüger',
+                    // 'publisherName': 'Stefan Krüger',
                     'target': [
                         {
-                            'target': 'nsis',
-                            // https://www.electron.build/configuration/nsis
-                            'oneClick': false
+                            'target': 'nsis'
                         },
                         {
                             'target': 'zip'
                         }
                     ]
+                },
+                'nsis': {
+                    // https://www.electron.build/configuration/nsis
+                    'oneClick': false
                 }
             }
         }
