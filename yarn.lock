@@ -1240,6 +1240,27 @@
     svgo "^1.2.2"
     to-ico "^1.1.5"
 
+"@quasar/quasar-app-extension-icon-genie@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-icon-genie/-/quasar-app-extension-icon-genie-1.0.1.tgz#ca3bd24bc297c9ae61efefe9b685885268d98053"
+  integrity sha512-XZxri7qlKFmehjPV12suJ/v5pQDOMGu6oxUpck4zGeWBL/5pcsxzAG1UckAPgxkKlgBAWKc5VzNXGjNJNp6c5A==
+  dependencies:
+    elementtree "^0.1.7"
+    execa "^1.0.0"
+    fs-extra "^7.0.1"
+    imagemin "^6.1.0"
+    imagemin-optipng "^6.0.0"
+    imagemin-pngcrush "^6.0.0"
+    imagemin-pngquant "^7.0.0"
+    imagemin-zopfli "^6.0.0"
+    is-png "^1.1.0"
+    minimist "^1.2.0"
+    png2icons "^2.0.0"
+    potrace "^2.1.2"
+    read-chunk "^3.0.0"
+    sharp "^0.22.1"
+    svgo "^1.2.2"
+
 "@serialport/binding-abstract@^2.0.5":
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/@serialport/binding-abstract/-/binding-abstract-2.0.5.tgz#e13305467c12effcd32c19c8b686a3f629e55cb3"
@@ -7942,6 +7963,11 @@ png2icons@^1.0.1:
   integrity sha1-vhqNkXgmzjr1QvFni8QYk1BkNf8=
   dependencies:
     pako "1.0.6"
+
+png2icons@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/png2icons/-/png2icons-2.0.1.tgz#09d8f10b71302e98ca178d3324bc4deff9b90124"
+  integrity sha512-GDEQJr8OG4e6JMp7mABtXFSEpgJa1CCpbQiAR+EjhkHJHnUL9zPPtbOrjsMD8gUbikgv3j7x404b0YJsV3aVFA==
 
 pngcrush-bin@^4.0.0:
   version "4.0.0"
