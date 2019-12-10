@@ -1,31 +1,4 @@
 {
-  "@quasar/icon-factory": {
-    "minify_dev": "optipng",
-    "minify_build": "optipng",
-    "cordova": {
-      "background_color": "#000074",
-      "splashscreen_type": "pure"
-    },
-    "build_always": false,
-    "__internal": {
-      "dev": {
-        "spa": {
-          "iconHash": "a02f4f34575297041747ae059a203f2c"
-        },
-        "electron": {
-          "iconHash": "a02f4f34575297041747ae059a203f2c"
-        }
-      },
-      "build": {
-        "spa": {
-          "iconHash": "a02f4f34575297041747ae059a203f2c"
-        },
-        "electron": {
-          "iconHash": "a02f4f34575297041747ae059a203f2c"
-        }
-      }
-    }
-  },
   "@quasar/icon-genie": {
     "minify_dev": "pngquant",
     "minify_build": "zopfli",
