@@ -285,6 +285,7 @@ export default {
                     extend(dummyResponderNew, dummyResponder)
                     this.deviceList = [dummyResponderNew]
                     // use new list
+                    // eslint-disable-next-line no-unused-vars
                     for (let device of devices) {
                         console.log(`device ${device}`)
                         // filter results..

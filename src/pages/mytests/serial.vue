@@ -275,6 +275,7 @@ export default {
                         extend(dummyResponderNew, dummyResponder)
                         this.deviceList = [dummyResponderNew]
                         // this.deviceList.push(...devices)
+                        // eslint-disable-next-line no-unused-vars
                         for (let device of devices) {
                             if (device.vendorId) {
                                 // console.log(device)
@@ -309,6 +310,7 @@ export default {
     computed: {
         testthings: function () {
             let result = []
+            // eslint-disable-next-line no-unused-vars
             for (let port of this.deviceList) {
                 result.push(port.comName)
             }
