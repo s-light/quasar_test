@@ -19,12 +19,14 @@
     },
     "dependencies": {
         "@quasar/extras": "^1.0.0",
+        "node-hid": "^1.2.0",
         "quasar": "^1.0.0",
-        "serialport": "^8.0.8",
-        "node-hid": "^1.2.0"
+        "serialport": "^8.0.8"
     },
     "devDependencies": {
         "@quasar/app": "^1.0.0",
+        "@vue/eslint-config-standard": "^4.0.0",
+        "ajv": "^6.10.0",
         "babel-eslint": "^10.0.1",
         "devtron": "^1.4.0",
         "electron": "^9.0.0",
@@ -39,10 +41,7 @@
         "eslint-plugin-promise": "^4.0.1",
         "eslint-plugin-standard": "^4.0.0",
         "eslint-plugin-vue": "^6.1.2",
-        "@vue/eslint-config-standard": "^4.0.0",
-        "ajv": "^6.10.0",
-        "strip-ansi": "=3.0.1",
-        "webpack": "^4.32.2"
+        "strip-ansi": "=3.0.1"
     },
     "engines": {
         "node": ">= 10.18.1",
