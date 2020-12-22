@@ -1,4 +1,14 @@
+/*
+ * This file runs in a Node context (it's NOT transpiled by Babel), so use only
+ * the ES6 features that are supported by your Node version. https://node.green/
+ */
+
 // Configuration for your app
+// https://quasar.dev/quasar-cli/quasar-conf-js
+/* eslint-env node */
+
+// const path = require('path')
+// console.log('path', path.join(__dirname, '../app_config/'))
 
 module.exports = function (ctx) {
     return {
@@ -22,7 +32,27 @@ module.exports = function (ctx) {
 
         framework: {
             // all: true, // --- includes everything; for dev only!
+            iconSet: 'material-icons', // Quasar icon set
+            lang: 'en-us', // Quasar language pack
+            config: {
+                notify: {
+                    position: 'top'
+                },
+                // https://quasar.dev/quasar-plugins/dark#Through-quasar.conf.js
+                dark: 'auto' // or Boolean true/false
+            },
 
+            // Possible values for "importStrategy":
+            // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
+            // * 'all'  - Manually specify what to import
+            importStrategy: 'auto',
+
+            // For special cases outside of where "auto" importStrategy can have an impact
+            // (like functional components as one of the examples),
+            // you can manually specify Quasar components/directives to be available everywhere:
+            //
+            // components: [],
+            // directives: [],
             components: [
                 'QLayout',
                 'QHeader',
@@ -57,9 +87,6 @@ module.exports = function (ctx) {
                 'LocalStorage',
                 'SessionStorage'
             ]
-
-            // iconSet: 'ionicons-v4'
-            // lang: 'de' // Quasar language
         },
 
         supportIE: false,
