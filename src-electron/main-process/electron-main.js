@@ -1,67 +1,57 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, nativeTheme } from 'electron'
+
+try {
+  if (process.platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
+    require('fs').unlinkSync(require('path').join(app.getPath('userData'), 'DevTools Extensions'))
+  }
+} catch (_) { }
 
 /**
-* Set `__statics` path to static files in production;
-* The reason we are setting it here is that the path needs to be evaluated at runtime
-*/
+ * Set `__statics` path to static files in production;
+ * The reason we are setting it here is that the path needs to be evaluated at runtime
+ */
 if (process.env.PROD) {
-    global.__statics = require('path').join(__dirname, 'statics').replace(/\\/g, '\\\\')
+  global.__statics = __dirname
 }
 
 let mainWindow
 
 function createWindow () {
-    /**
-    * Initial window options
-    */
-    mainWindow = new BrowserWindow({
-        width: 1000,
-        height: 700,
-        useContentSize: true,
-        webPreferences: {
-            nodeIntegration: true,
-            enableRemoteModule: false,
-            webSecurity: true
-        }
-    })
+  /**
+   * Initial window options
+   */
+  mainWindow = new BrowserWindow({
+    width: 1000,
+    height: 600,
+    useContentSize: true,
+    webPreferences: {
+      // Change from /quasar.conf.js > electron > nodeIntegration;
+      // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration
+      nodeIntegration: process.env.QUASAR_NODE_INTEGRATION,
+      nodeIntegrationInWorker: process.env.QUASAR_NODE_INTEGRATION,
 
-    mainWindow.loadURL(process.env.APP_URL)
+      // More info: /quasar-cli/developing-electron-apps/electron-preload-script
+      // preload: path.resolve(__dirname, 'electron-preload.js')
+    }
+  })
 
-    mainWindow.on('closed', () => {
-        mainWindow = null
-    })
+  mainWindow.loadURL(process.env.APP_URL)
+
+  mainWindow.on('closed', () => {
+    mainWindow = null
+  })
 }
 
 app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit()
-    }
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
 })
 
 app.on('activate', () => {
-    if (mainWindow === null) {
-        createWindow()
-    }
+  if (mainWindow === null) {
+    createWindow()
+  }
 })
-
-// https://electronjs.org/docs/tutorial/security#13-disable-or-limit-creation-of-new-windows
-app.on('web-contents-created', (event, contents) => {
-    contents.on('new-window', async (event, navigationUrl) => {
-        event.preventDefault()
-        // console.error('no new windows allowed.')
-    })
-})
-
-// https://electronjs.org/docs/tutorial/security#csp-http-header
-// const { session } = require('electron')
-//
-// session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
-//     callback({
-//         responseHeaders: {
-//             ...details.responseHeaders,
-//             'Content-Security-Policy': ['default-src \'none\'']
-//         }
-//     })
-// })
